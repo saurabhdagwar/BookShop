@@ -10,8 +10,6 @@
 
 # production
 /build
-SignUp/
-AppBar/
 # misc
 .DS_Store
 .env.local
