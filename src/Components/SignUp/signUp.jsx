@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import Services from "../../Services/userServices"
+import Services from "../../Services/userServices";
 const services = new Services();
 
 const useStyles = makeStyles((theme) => ({
@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     width: "90%",
+    fontSize: "1.2em",
+    fontFamily: "roboto,'Noto Sans Myanmar UI',arial,sans-serif",
+    color: "#A03037",
   },
   inputField: {
     margin: "5px 0 5px 0",
@@ -42,18 +45,18 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp(props) {
   const classes = useStyles();
   const [name, setName] = React.useState();
-  const [nameFlag,setNameFlag] = React.useState();
+  const [nameFlag, setNameFlag] = React.useState();
   const [nameError, setNameError] = React.useState("");
   const [email, setEmail] = React.useState();
-  const [emailFlag,setEmailFlag] = React.useState(false);
+  const [emailFlag, setEmailFlag] = React.useState(false);
   const [emailError, setEmailError] = React.useState("");
   const [password, setPassword] = React.useState();
-  const [passwordFlag,setPasswordFlag] = React.useState(false);
+  const [passwordFlag, setPasswordFlag] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState("");
   const [mobile, setMobile] = React.useState();
-  const [mobileFlag,setMobileFlag] = React.useState(false);
+  const [mobileFlag, setMobileFlag] = React.useState(false);
   const [mobileError, setMobileError] = React.useState("");
-  
+
   const nextPath = (path) => {
     props.history.push(path);
   };
@@ -67,62 +70,62 @@ export default function SignUp(props) {
     setMobileError("");
     setPasswordFlag(false);
     setPasswordError("");
-  }
+  };
 
   const patternCheck = () => {
     makeInitial();
-      const namePattern = /^[A-Z]{1}[a-z ]{3,}$/
-      const emailPattern = /[a-zA-Z0-9._]+[@]{1}[a-zA-Z120-9]*[.]{1}[a-zA-Z]*$/
-      const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/
-      const mobilePattern = /^[6-9]{1}[0-9]{9}$/
-      let isError = false
-    if(!(namePattern.test(name))){
-        setNameFlag(true);
-        setNameError("Name is Not Proper");
-        // console.log("Name is Not Proper")
-        isError = true;
+    const namePattern = /^[A-Z]{1}[a-z ]{3,}$/;
+    const emailPattern = /[a-zA-Z0-9._]+[@]{1}[a-zA-Z120-9]*[.]{1}[a-zA-Z]*$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/;
+    const mobilePattern = /^[6-9]{1}[0-9]{9}$/;
+    let isError = false;
+    if (!namePattern.test(name)) {
+      setNameFlag(true);
+      setNameError("Name is Not Proper");
+      // console.log("Name is Not Proper")
+      isError = true;
     }
-    if(!(mobilePattern.test(mobile))){
-        setMobileFlag(true);
-        setMobileError("Mobile Number is Not Proper");
-        // console.log("Mobile Number is Not Proper")
-        isError = true;
+    if (!mobilePattern.test(mobile)) {
+      setMobileFlag(true);
+      setMobileError("Mobile Number is Not Proper");
+      // console.log("Mobile Number is Not Proper")
+      isError = true;
     }
-    if(!(emailPattern.test(email))){
-        setEmailFlag(true);
-        setEmailError("Email is Not Proper");
-        // console.log("Email is Not Proper")
-        isError = true;
+    if (!emailPattern.test(email)) {
+      setEmailFlag(true);
+      setEmailError("Email is Not Proper");
+      // console.log("Email is Not Proper")
+      isError = true;
     }
-    if(!(passwordPattern.test(password))){
-        setPasswordFlag(true);
-        setPasswordError("Please Enter Valid Password");
-        // console.log("Please Enter Valid Password")
-        isError = true;
+    if (!passwordPattern.test(password)) {
+      setPasswordFlag(true);
+      setPasswordError("Please Enter Valid Password");
+      // console.log("Please Enter Valid Password")
+      isError = true;
     }
     return isError;
-  }
+  };
 
   const submit = () => {
-    if(patternCheck()){
-        console.log("Error Occured");
-    }
-    else{
-        console.log("Success");
-        const data = {
-            "fullName": name,
-            "email": email,
-            "password": password,
-            "phone": mobile
-        }
-        services.SignUp(data)
+    if (patternCheck()) {
+      console.log("Error Occured");
+    } else {
+      console.log("Success");
+      const data = {
+        fullName: name,
+        email: email,
+        password: password,
+        phone: mobile,
+      };
+      services
+        .SignUp(data)
         .then((data) => {
-            console.log('registration successful'+data);
-            nextPath("../Login")
+          console.log("registration successful" + data);
+          nextPath("../Login");
         })
         .catch((err) => {
-            console.log('Registration Error'+err);
-        })
+          console.log("Registration Error" + err);
+        });
     }
   };
 
@@ -131,8 +134,8 @@ export default function SignUp(props) {
       <Dialog open={true}>
         <div className={classes.signUpMain}>
           <div className={classes.header}>
-            <Button> Login </Button>
-            <Button> Sign Up </Button>
+            <Button onClick={() => nextPath("../Login")}> Login </Button>
+            Sign Up
           </div>
           <div className={classes.inputField}>
             <TextField
@@ -180,7 +183,12 @@ export default function SignUp(props) {
               type="number"
             />
           </div>
-          <Button fullWidth className={classes.regButton} onClick={submit} variant="contained">
+          <Button
+            fullWidth
+            className={classes.regButton}
+            onClick={submit}
+            variant="contained"
+          >
             Sign Up
           </Button>
         </div>
