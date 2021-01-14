@@ -2,68 +2,189 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import logo from "../../assets/education.svg";
+import Dialog from "@material-ui/core/Dialog";
+import Services from "../../Services/userServices"
+const services = new Services();
 
 const useStyles = makeStyles((theme) => ({
   signUpMain: {
     display: "flex",
     flexDirection: "column",
-    border: "2px solid #A03037",
+    justifyContent: "center",
     borderRadius: "10px",
     padding: "30px",
-    width: "300px"
+    width: "300px",
   },
-  header:{
-      justifySelf: "flex-start",
-      width: "70%"
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "90%",
   },
-  inputField:{
-      margin: "5px 0 5px 0",
+  inputField: {
+    margin: "5px 0 5px 0",
+    width: "90%",
   },
-  input:{
-    width: "80%",
-    color: "#A03037"
+  input: {
+    color: "#A03037",
   },
-  signUpButton:{
-      marginTop: "10px",
-      display:"flex",
-      justifyContent:"space-between",
+  signUpButton: {
+    marginTop: "10px",
+    display: "flex",
+    justifyContent: "space-between",
   },
-  regButton:{
-      color: "#A03037"
-  }
+  regButton: {
+    marginTop: "20px",
+    background: "#A03037",
+    width: "90%",
+  },
 }));
 
 export default function SignUp(props) {
   const classes = useStyles();
-  return (
-    <div className={classes.signUpMain}>
-        <div className={classes.titleField}>
-        <div className={classes.header}>
-        <img className={classes.titleLogo} src={logo} />
-        <Typography variant="h6">Bookshop</Typography>
-        </div>
+  const [name, setName] = React.useState();
+  const [nameFlag,setNameFlag] = React.useState();
+  const [nameError, setNameError] = React.useState("");
+  const [email, setEmail] = React.useState();
+  const [emailFlag,setEmailFlag] = React.useState(false);
+  const [emailError, setEmailError] = React.useState("");
+  const [password, setPassword] = React.useState();
+  const [passwordFlag,setPasswordFlag] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState("");
+  const [mobile, setMobile] = React.useState();
+  const [mobileFlag,setMobileFlag] = React.useState(false);
+  const [mobileError, setMobileError] = React.useState("");
+  
+  const nextPath = (path) => {
+    props.history.push(path);
+  };
 
+  const makeInitial = () => {
+    setNameFlag(false);
+    setNameError("");
+    setEmailFlag(false);
+    setEmailError("");
+    setMobileFlag(false);
+    setMobileError("");
+    setPasswordFlag(false);
+    setPasswordError("");
+  }
+
+  const patternCheck = () => {
+    makeInitial();
+      const namePattern = /^[A-Z]{1}[a-z ]{3,}$/
+      const emailPattern = /[a-zA-Z0-9._]+[@]{1}[a-zA-Z120-9]*[.]{1}[a-zA-Z]*$/
+      const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/
+      const mobilePattern = /^[6-9]{1}[0-9]{9}$/
+      let isError = false
+    if(!(namePattern.test(name))){
+        setNameFlag(true);
+        setNameError("Name is Not Proper");
+        // console.log("Name is Not Proper")
+        isError = true;
+    }
+    if(!(mobilePattern.test(mobile))){
+        setMobileFlag(true);
+        setMobileError("Mobile Number is Not Proper");
+        // console.log("Mobile Number is Not Proper")
+        isError = true;
+    }
+    if(!(emailPattern.test(email))){
+        setEmailFlag(true);
+        setEmailError("Email is Not Proper");
+        // console.log("Email is Not Proper")
+        isError = true;
+    }
+    if(!(passwordPattern.test(password))){
+        setPasswordFlag(true);
+        setPasswordError("Please Enter Valid Password");
+        // console.log("Please Enter Valid Password")
+        isError = true;
+    }
+    return isError;
+  }
+
+  const submit = () => {
+    if(patternCheck()){
+        console.log("Error Occured");
+    }
+    else{
+        console.log("Success");
+        const data = {
+            "fullName": name,
+            "email": email,
+            "password": password,
+            "phone": mobile
+        }
+        services.SignUp(data)
+        .then((data) => {
+            console.log('registration successful'+data);
+            nextPath("../Login")
+        })
+        .catch((err) => {
+            console.log('Registration Error'+err);
+        })
+    }
+  };
+
+  return (
+    <>
+      <Dialog open={true}>
+        <div className={classes.signUpMain}>
+          <div className={classes.header}>
+            <Button> Login </Button>
+            <Button> Sign Up </Button>
+          </div>
+          <div className={classes.inputField}>
+            <TextField
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              error={nameFlag}
+              helperText={nameError}
+              fullWidth
+              className={classes.input}
+              label="Full Name"
+            />
+          </div>
+          <div className={classes.inputField}>
+            <TextField
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={emailFlag}
+              helperText={emailError}
+              fullWidth
+              className={classes.input}
+              label="Email"
+            />
+          </div>
+          <div className={classes.inputField}>
+            <TextField
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={passwordFlag}
+              helperText={passwordError}
+              fullWidth
+              className={classes.input}
+              label="Password"
+              type="password"
+            />
+          </div>
+          <div className={classes.inputField}>
+            <TextField
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+              error={mobileFlag}
+              helperText={mobileError}
+              fullWidth
+              className={classes.input}
+              label="Mobile"
+              type="number"
+            />
+          </div>
+          <Button fullWidth className={classes.regButton} onClick={submit} variant="contained">
+            Sign Up
+          </Button>
         </div>
-      <div className={classes.inputField}>
-        <TextField className={classes.input} label="Full Name" />
-      </div>
-      <div className={classes.inputField}>
-        <TextField className={classes.input} label="Email" />
-      </div>
-      <div className={classes.inputField}>
-        <TextField className={classes.input} label="Password" type="password" />
-      </div>
-      <div className={classes.inputField}>
-        <TextField className={classes.input} label="Mobile" type="number" />
-      </div>
-      <div className={classes.signUpButton}>
-      <Button className={classes.regButton}>Login</Button>
-        <Button  className={classes.regButton} variant="outlined" color="primary">
-          Sign Up
-        </Button>
-      </div>
-    </div>
+      </Dialog>
+    </>
   );
 }
