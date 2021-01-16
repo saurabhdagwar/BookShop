@@ -82,25 +82,21 @@ export default function SignUp(props) {
     if (!namePattern.test(name)) {
       setNameFlag(true);
       setNameError("Name is Not Proper");
-      // console.log("Name is Not Proper")
       isError = true;
     }
     if (!mobilePattern.test(mobile)) {
       setMobileFlag(true);
       setMobileError("Mobile Number is Not Proper");
-      // console.log("Mobile Number is Not Proper")
       isError = true;
     }
     if (!emailPattern.test(email)) {
       setEmailFlag(true);
       setEmailError("Email is Not Proper");
-      // console.log("Email is Not Proper")
       isError = true;
     }
     if (!passwordPattern.test(password)) {
       setPasswordFlag(true);
       setPasswordError("Please Enter Valid Password");
-      // console.log("Please Enter Valid Password")
       isError = true;
     }
     return isError;

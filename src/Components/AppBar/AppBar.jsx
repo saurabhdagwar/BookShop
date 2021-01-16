@@ -13,19 +13,19 @@ const useStyles = makeStyles((theme) => ({
   AppBar: {
     backgroundColor: "#A03037",
   },
-  toolBar:{
+  toolBar: {
     display: "flex",
     justifyContent: "space-around",
   },
-  leftOptions:{
+  leftOptions: {
     display: "flex",
     width: "50%",
     justifyContent: "space-around",
-    alignItems: "center"
+    alignItems: "center",
   },
-  rightOptions:{
-      display: "flex",
-      alignItems: "center"
+  rightOptions: {
+    display: "flex",
+    alignItems: "center",
   },
   search: {
     position: "relative",
@@ -38,6 +38,22 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "70%",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
+  title: {
+    display: "flex",
+    flexDirection: "row",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "flex-start",
+    },
+  },
+  titleLogo: {
+    marginRight: "10px",
+  },
+  titleName: {
+    marginRight: "20px",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -52,9 +68,15 @@ const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: "inherit",
   },
+  buttonSearch: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "block",
+      marginRight: "20px",
+    },
+  },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -72,28 +94,28 @@ export default function Appbar(props) {
       <AppBar className={classes.AppBar}>
         <Toolbar className={classes.toolBar}>
           <div className={classes.leftOptions}>
-            <img className={classes.titleLogo} src={logo} />
-            <Typography variant="h6">Bookshop</Typography>
+            <div className={classes.title}>
+              <img className={classes.titleLogo} src={logo} />
+              <Typography className={classes.titleName} variant="h6">
+                Bookstore
+              </Typography>
+            </div>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
               <InputBase
                 placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                //   inputProps={{ 'aria-label': 'search' }}
+                classes={{ input: classes.inputInput }}
               />
             </div>
           </div>
           <div className={classes.rightOptions}>
-           Cart <ShoppingCartOutlinedIcon />
+            <SearchIcon className={classes.buttonSearch} />
+            Cart <ShoppingCartOutlinedIcon />
           </div>
         </Toolbar>
       </AppBar>
-      <Toolbar />
     </React.Fragment>
   );
 }

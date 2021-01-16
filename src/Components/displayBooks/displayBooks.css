@@ -1,0 +1,33 @@
+
+.displayBook{
+    margin-top: 80px;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    width: 100%;
+    min-height: 90vh ;
+}
+.bookContainer{
+    border: solid lightgray 1px;
+    border-radius: 8px;
+    margin: 10px;
+    height: 280px;
+    width: 220px;
+}
+.imageContainer{
+    background-color: lightgray;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.infoContainer{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: space-between;
+}
