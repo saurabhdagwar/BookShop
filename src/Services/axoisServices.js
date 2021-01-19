@@ -1,10 +1,11 @@
-import axios from "axios"
+import axios from "axios";
 
 export default class axiosServices {
-    Post = (url,data, isHeaderRequired = false ) => {
+  Post = (url,data, isHeaderRequired = false) => {
         return axios.post(url, data, isHeaderRequired)
-    } 
-    Get = (url, isHeaderRequired = false ) => {
-        return axios.get(url, isHeaderRequired)
-    }
+    };
+
+  Get = (url , data , isHeaderRequired = false) => {
+    return axios.get(url, data , isHeaderRequired);
+  };
 }

@@ -92,9 +92,9 @@ export default function Login(props) {
       services
         .SignIn(data)
         .then((data) => {
-          console.log("Login successful" + JSON.stringify(data.config.data));
-          localStorage.setItem("bookStoreUser", data.config.data);
-          // nextPath("../")
+          console.log("Login successful" + JSON.stringify(data.data.result.accessToken));
+          localStorage.setItem("bookStoreToken", data.data.result.accessToken);
+          nextPath("../dashboard")
         })
         .catch((err) => {
           console.log("Login Error" + err);
