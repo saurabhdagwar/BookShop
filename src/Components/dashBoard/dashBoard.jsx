@@ -17,11 +17,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard(props) {
     const classes = useStyles();
     const [show, setShow] = React.useState(false);
+    const [totalCartItem, setTotalCartItem] = React.useState();
 
     return (
         <div className={classes.dashboardMain}>
-            <AppBar setShow={setShow}/>
-        {show ? <Cart /> : <Books />}
+            <AppBar totalCartItem={totalCartItem} setShow={setShow}/>
+        {show ? <Cart setTotalCartItem={setTotalCartItem} /> : <Books />}
             
         </div>
     )

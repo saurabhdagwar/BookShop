@@ -9,6 +9,17 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import SearchIcon from "@material-ui/icons/SearchOutlined";
 import logo from "../../assets/education.svg";
 import IconButton from '@material-ui/core/IconButton'
+import { withStyles } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
+
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}))(Badge);
 
 const useStyles = makeStyles((theme) => ({
   AppBar: {
@@ -117,8 +128,11 @@ export default function Appbar(props) {
           </div>
           <div className={classes.rightOptions}>
             <SearchIcon className={classes.buttonSearch} />
+
           <IconButton className={classes.cartButton} onClick={() => {props.setShow(true)}}>
-            Cart <ShoppingCartOutlinedIcon />
+          <StyledBadge badgeContent={props.totalCartItem} >
+             <ShoppingCartOutlinedIcon />
+            </StyledBadge>
             </IconButton>
           </div>
         </Toolbar>
