@@ -1,0 +1,41 @@
+.cartBody{
+    top: 15%;
+    width: 80%;
+    position: absolute;
+}
+.cartItem{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.cartBookItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+.cartBlock {
+    border: 1px lightgray solid;
+    width: 70%;
+    padding: 15px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.cartContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+.cartBookImage{
+    width: 20%;
+    height: 70%;
+}
+.countItem{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+
+}

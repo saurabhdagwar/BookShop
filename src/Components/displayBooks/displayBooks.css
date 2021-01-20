@@ -10,10 +10,10 @@
 .topContent{
     font-size: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    width: 100%;
+    width: 77%;
 }
 .allBooks{
     display: flex;
@@ -28,6 +28,10 @@
     margin: 15px;
     height: 280px;
     width: 200px;
+}
+.bookSize{
+    font-size: 12px;
+    font-weight: normal;
 }
 .imageContainer{
     background-color: lightgray;

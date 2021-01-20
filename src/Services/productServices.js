@@ -18,11 +18,11 @@ export default class productServices {
 
   getCartItem = () => {
     const user = localStorage.getItem("bookStoreToken")
-    return axios.Get(`${baseUrl}/get_cart_item`,false,{
+    return axios.Get(`${baseUrl}/get_cart_items`, {
         headers: {
           "x-access-token": `${user}`,
         },
       });
   };
-  
+
 }

@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "2px",
     fontWeight: "bold",
   },
+
   optionSelect: {
     padding: "5px 5px",
   },
@@ -50,10 +51,8 @@ const useStyles = makeStyles((theme) => ({
 export default function DisplayNotes() {
   const classes = useStyles();
   const [books, setBooks] = React.useState([]);
-  const [addToBag, setAddToBag] = React.useState(false);
   const [filter, setFilter] = React.useState(0);
   const [sort, setSort] = React.useState({ type: "" });
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
   React.useEffect(() => {
     getAllBooks();
@@ -64,7 +63,7 @@ export default function DisplayNotes() {
       .getBooks()
       .then((data) => {
         setBooks(data.data.result);
-        console.log(books);
+        console.log(data.data.result);
       })
       .catch((err) => {
         console.log(err);
@@ -82,6 +81,8 @@ export default function DisplayNotes() {
   const addedToBag = (e, data) => {
     e.stopPropagation();
     const id = data._id;
+    data.isCart = true;
+    // setBooks(data);
     services
       .addToCart(id)
       .then((data) => {
@@ -95,7 +96,9 @@ export default function DisplayNotes() {
   return (
     <div className="displayBook">
       <span className="topContent">
-        <div>Books {books.length}</div>
+        <div>
+          Books <font className="bookSize"> ({books.length} items) </font>{" "}
+        </div>
         <div>
           <FormControl variant="outlined" className={classes.formControl}>
             <Select
@@ -105,54 +108,66 @@ export default function DisplayNotes() {
               onChange={handleChange}
               inputProps={{
                 name: "type",
-              }} >
-              <option value={0} onClick={() => setFilter(0)}>Sort by relevance</option>
-              <option value={1} onClick={() => setFilter(1)}>Price: low to high</option>
-              <option value={2} onClick={() => setFilter(2)}>Price: high to low</option>
-              <option value={3} onClick={() => setFilter(3)}>Newest Arrival</option>
+              }}
+            >
+              <option value={0} onClick={() => setFilter(0)}>
+                Sort by relevance
+              </option>
+              <option value={1} onClick={() => setFilter(1)}>
+                Price: low to high
+              </option>
+              <option value={2} onClick={() => setFilter(2)}>
+                Price: high to low
+              </option>
+              <option value={3} onClick={() => setFilter(3)}>
+                Newest Arrival
+              </option>
             </Select>
           </FormControl>
         </div>
       </span>
       <div className="allBooks">
-        {(books.sort((a, b) => (a.price > b.price) ? -1 : 1))
-        .map((data) => (
-          <div className="bookContainer">
-            <div className="imageContainer">
-              <img className="bookImage" src={bookImg} alt="" />
+        {books.map((data) => (
+            <div className="bookContainer">
+              <div className="imageContainer">
+                <img className="bookImage" src={bookImg} alt="" />
+              </div>
+              <div className="infoContainer">
+                <Typography className={classes.bookName}>
+                  {data.bookName}
+                </Typography>
+                <Typography className={classes.bookAuthor}>
+                  {data.author}
+                </Typography>
+                <Typography className={classes.bookQuantity}>
+                  {data.quantity}
+                </Typography>
+                <Typography className={classes.bookPrize}>
+                  Rs. {data.price}
+                </Typography>
+              </div>
+              {data.isCart ? "ss" : 
+               <div className="buttonContainer">
+                <Button
+                  variant="contained"
+                  onClick={(e) => addedToBag(e, data)}
+                  className={classes.addToBagButton}
+                >
+                  Add To Bag
+                </Button>
+                <Button variant="outlined" className={classes.wishListButton}>
+                  WishList
+                </Button>
+              </div>}
+             
+              <div className="descClass">
+                <Typography className={classes.bookName}>
+                  Book Detail
+                </Typography>
+                {data.description}
+              </div>
             </div>
-            <div className="infoContainer">
-              <Typography className={classes.bookName}>
-                {data.bookName}
-              </Typography>
-              <Typography className={classes.bookAuthor}>
-                {data.author}
-              </Typography>
-              <Typography className={classes.bookQuantity}>
-                {data.quantity}
-              </Typography>
-              <Typography className={classes.bookPrize}>
-                Rs. {data.price}
-              </Typography>
-            </div>
-            <div className="buttonContainer">
-              <Button
-                variant="contained"
-                onClick={(e) => addedToBag(e, data)}
-                className={classes.addToBagButton}
-              >
-                Add To Bag
-              </Button>
-              <Button variant="outlined" className={classes.wishListButton}>
-                WishList
-              </Button>
-            </div>
-            <div className="descClass">
-              <Typography className={classes.bookName}>Book Detail</Typography>
-              {data.description}
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

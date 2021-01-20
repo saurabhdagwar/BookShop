@@ -12,8 +12,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     borderRadius: "10px",
+    width: "350px",
+  },
+  Title: {
+    width: "100%",
+    height: "10%",
+    backgroundColor: "#A03037",
+    color: "white",
+    textAlign: "center",
+    fontSize: "25px",
+    fontWeight: "bold",
+  },
+  SignUpBody: {
     padding: "30px",
-    width: "300px",
   },
   header: {
     display: "flex",
@@ -106,6 +117,8 @@ export default function Login(props) {
     <>
       <Dialog open={true}>
         <div className={classes.loginMain}>
+          <div className={classes.Title}>Book Store</div>
+          <div className={classes.SignUpBody}>
           <div className={classes.header}>
             Login
             <Button onClick={() => nextPath("../SignUp")}> Sign Up </Button>
@@ -141,6 +154,7 @@ export default function Login(props) {
           >
             Login
           </Button>
+          </div>
         </div>
       </Dialog>
     </>

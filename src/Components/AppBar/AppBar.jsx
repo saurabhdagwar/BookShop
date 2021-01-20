@@ -8,6 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import SearchIcon from "@material-ui/icons/SearchOutlined";
 import logo from "../../assets/education.svg";
+import IconButton from '@material-ui/core/IconButton'
 
 const useStyles = makeStyles((theme) => ({
   AppBar: {
@@ -84,6 +85,10 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
+  cartButton:{
+    fontSize: "14px",
+    color: "white"
+  }
 }));
 
 export default function Appbar(props) {
@@ -112,7 +117,9 @@ export default function Appbar(props) {
           </div>
           <div className={classes.rightOptions}>
             <SearchIcon className={classes.buttonSearch} />
+          <IconButton className={classes.cartButton} onClick={() => {props.setShow(true)}}>
             Cart <ShoppingCartOutlinedIcon />
+            </IconButton>
           </div>
         </Toolbar>
       </AppBar>

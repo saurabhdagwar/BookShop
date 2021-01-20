@@ -12,8 +12,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     borderRadius: "10px",
+    width: "350px",
+  },
+  Title: {
+    width: "100%",
+    height: "10%",
+    backgroundColor: "#A03037",
+    color: "white",
+    textAlign: "center",
+    fontSize: "25px",
+    fontWeight: "bold",
+  },
+  SignUpBody: {
     padding: "30px",
-    width: "300px",
   },
   header: {
     display: "flex",
@@ -129,64 +140,67 @@ export default function SignUp(props) {
     <>
       <Dialog open={true}>
         <div className={classes.signUpMain}>
-          <div className={classes.header}>
-            <Button onClick={() => nextPath("../Login")}> Login </Button>
-            Sign Up
-          </div>
-          <div className={classes.inputField}>
-            <TextField
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              error={nameFlag}
-              helperText={nameError}
+          <div className={classes.Title}>Book Store</div>
+          <div className={classes.SignUpBody}>
+            <div className={classes.header}>
+              <Button onClick={() => nextPath("../Login")}> Login </Button>
+              Sign Up
+            </div>
+            <div className={classes.inputField}>
+              <TextField
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                error={nameFlag}
+                helperText={nameError}
+                fullWidth
+                className={classes.input}
+                label="Full Name"
+              />
+            </div>
+            <div className={classes.inputField}>
+              <TextField
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={emailFlag}
+                helperText={emailError}
+                fullWidth
+                className={classes.input}
+                label="Email"
+              />
+            </div>
+            <div className={classes.inputField}>
+              <TextField
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={passwordFlag}
+                helperText={passwordError}
+                fullWidth
+                className={classes.input}
+                label="Password"
+                type="password"
+              />
+            </div>
+            <div className={classes.inputField}>
+              <TextField
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+                error={mobileFlag}
+                helperText={mobileError}
+                fullWidth
+                className={classes.input}
+                label="Mobile"
+                type="number"
+              />
+            </div>
+            <Button
               fullWidth
-              className={classes.input}
-              label="Full Name"
-            />
+              className={classes.regButton}
+              onClick={submit}
+              variant="contained"
+            >
+              Sign Up
+            </Button>
           </div>
-          <div className={classes.inputField}>
-            <TextField
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              error={emailFlag}
-              helperText={emailError}
-              fullWidth
-              className={classes.input}
-              label="Email"
-            />
-          </div>
-          <div className={classes.inputField}>
-            <TextField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              error={passwordFlag}
-              helperText={passwordError}
-              fullWidth
-              className={classes.input}
-              label="Password"
-              type="password"
-            />
-          </div>
-          <div className={classes.inputField}>
-            <TextField
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-              error={mobileFlag}
-              helperText={mobileError}
-              fullWidth
-              className={classes.input}
-              label="Mobile"
-              type="number"
-            />
-          </div>
-          <Button
-            fullWidth
-            className={classes.regButton}
-            onClick={submit}
-            variant="contained"
-          >
-            Sign Up
-          </Button>
         </div>
       </Dialog>
     </>
