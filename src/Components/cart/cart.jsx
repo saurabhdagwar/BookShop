@@ -10,7 +10,6 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import "./cart.css";
 
 const services = new Services();
@@ -53,36 +52,20 @@ const useStyles = makeStyles((theme) => ({
     padding: "5px",
     minHeight: "43px",
   },
-  radioGroup:{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
+  radioGroup: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 }));
 
 export default function Cart(props) {
   const classes = useStyles();
-  const [books, setBooks] = React.useState([]);
+  const [books, setBooks] = React.useState(props.cartBooks);
   const [detailForm, setDetailForm] = React.useState(false);
   const [summaryField, setSummaryField] = React.useState(false);
   const [value, setValue] = React.useState("Home");
 
-  React.useEffect(() => {
-    allCartItem();
-  }, []);
-
-  const allCartItem = () => {
-    services
-      .getCartItem()
-      .then((data) => {
-        console.log(data.data.result);
-        setBooks(data.data.result);
-        props.setTotalCartItem(data.data.result.length);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -191,28 +174,27 @@ export default function Cart(props) {
   };
 
   const CheckoutItem = () => {
-
     return (
       <div className="cartItem">
-      {books.map((data) => (
-        <div className="cartBookItem">
-          <img className="cartBookImage" src={bookImg} alt="" />
-          <div className="infoContainer">
-            <Typography className={classes.bookName}>
-              {data.product_id.bookName}
-            </Typography>
-            <Typography className={classes.bookAuthor}>
-              {data.product_id.author}
-            </Typography>
-            <Typography className={classes.bookPrize}>
-              Rs. {data.product_id.price}
-            </Typography>
+        {books.map((data) => (
+          <div className="cartBookItem">
+            <img className="cartBookImage" src={bookImg} alt="" />
+            <div className="infoContainer">
+              <Typography className={classes.bookName}>
+                {data.product_id.bookName}
+              </Typography>
+              <Typography className={classes.bookAuthor}>
+                {data.product_id.author}
+              </Typography>
+              <Typography className={classes.bookPrize}>
+                Rs. {data.product_id.price}
+              </Typography>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
-    )
-  } 
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="cartBody">
@@ -232,34 +214,43 @@ export default function Cart(props) {
       </div>
       <div className="cartContainer">
         Customer Details
-      { detailForm ? <>
-        <CustomerDetailsForm />
-        <div className="blockButton">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.placeButton}
-            onClick={() => setSummaryField(true)}
-          >
-            CONTINUE
-          </Button>
-        </div> </> : "" }
+        {detailForm ? (
+          <>
+            <CustomerDetailsForm />
+            <div className="blockButton">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.placeButton}
+                onClick={() => setSummaryField(true)}
+              >
+                CONTINUE
+              </Button>
+            </div>{" "}
+          </>
+        ) : (
+          ""
+        )}
       </div>
 
-      <div className="cartContainer">Order Summary
-        {summaryField ? 
-      <>
-      <CheckoutItem />
-      <div className="blockButton">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.placeButton}
-          >
-           CHECKOUT
-          </Button>
-        </div>
-        </> : ""}
+      <div className="cartContainer">
+        Order Summary
+        {summaryField ? (
+          <>
+            <CheckoutItem />
+            <div className="blockButton">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.placeButton}
+              >
+                CHECKOUT
+              </Button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

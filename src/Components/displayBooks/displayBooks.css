@@ -1,7 +1,7 @@
 
 .displayBook{
     margin-top: 80px;
-    width: 100%;
+    width: 74%;
     min-height: 90vh ;
     display: flex;
     flex-direction: column;
@@ -13,13 +13,13 @@
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    width: 77%;
+    width: 100%;
 }
 .allBooks{
     display: flex;
     flex-flow: wrap;
-    justify-content: center;
-    width: 80%;
+    justify-content: flex-start;
+    width: 100%;
 }
 .bookContainer{
     border: solid lightgray 1px;

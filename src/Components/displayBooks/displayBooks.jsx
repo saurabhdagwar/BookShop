@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+
 import "./displayBooks.css";
 const services = new Services();
 
@@ -48,22 +49,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DisplayNotes() {
+export default function DisplayNotes(props) {
   const classes = useStyles();
   const [books, setBooks] = React.useState([]);
-  const [filter, setFilter] = React.useState(0);
+  const [data, setData] = React.useState(0);
   const [sort, setSort] = React.useState({ type: "" });
 
   React.useEffect(() => {
     getAllBooks();
   }, []);
 
+
   const getAllBooks = () => {
     services
       .getBooks()
       .then((data) => {
         setBooks(data.data.result);
-        console.log(data.data.result);
+        setData(data.data.result);
+        // console.log(data.data.result);
       })
       .catch((err) => {
         console.log(err);
@@ -76,13 +79,33 @@ export default function DisplayNotes() {
       ...sort,
       [name]: event.target.value,
     });
+    console.log(sort.type);
+    switch (sort.type) {
+      case '0':
+        setBooks(data);
+        break;
+      case '2':
+        setBooks(data.sort((a, b) => (a.price > b.price) ? 1 : -1));
+        break;
+      case '1':
+        setBooks(data.sort((a, b) => (a.price > b.price) ? -1 : 1));
+        break;
+      case '3':
+        setBooks(data.reverse());
+        break;
+    }
   };
+
+  const cartCheck = (e,data) => {
+    e.stopPropagation();
+    console.log("cartBooks"+props.cartBooks);
+   
+  }
 
   const addedToBag = (e, data) => {
     e.stopPropagation();
     const id = data._id;
     data.isCart = true;
-    // setBooks(data);
     services
       .addToCart(id)
       .then((data) => {
@@ -110,16 +133,16 @@ export default function DisplayNotes() {
                 name: "type",
               }}
             >
-              <option value={0} onClick={() => setFilter(0)}>
+              <option value={0} >
                 Sort by relevance
               </option>
-              <option value={1} onClick={() => setFilter(1)}>
+              <option value={1} >
                 Price: low to high
               </option>
-              <option value={2} onClick={() => setFilter(2)}>
+              <option value={2} >
                 Price: high to low
               </option>
-              <option value={3} onClick={() => setFilter(3)}>
+              <option value={3} >
                 Newest Arrival
               </option>
             </Select>
@@ -128,26 +151,42 @@ export default function DisplayNotes() {
       </span>
       <div className="allBooks">
         {books.map((data) => (
-            <div className="bookContainer">
-              <div className="imageContainer">
-                <img className="bookImage" src={bookImg} alt="" />
-              </div>
-              <div className="infoContainer">
-                <Typography className={classes.bookName}>
-                  {data.bookName}
-                </Typography>
-                <Typography className={classes.bookAuthor}>
-                  {data.author}
-                </Typography>
-                <Typography className={classes.bookQuantity}>
-                  {data.quantity}
-                </Typography>
-                <Typography className={classes.bookPrize}>
-                  Rs. {data.price}
-                </Typography>
-              </div>
-              {data.isCart ? "ss" : 
-               <div className="buttonContainer">
+          <div className="bookContainer" onLoad={
+            (e) => {
+              e.stopPropagation();
+              const check = props.cartBooks.some((cart) => cart.product_id._id === data._id)
+               if(check){
+                data.isCart = true;
+                console.log("Cart----------");
+              }
+              else{
+                data.isCart = false;
+              }
+              console.log(check);
+              // console.log(props.cartBooks);
+            }
+          }>
+            <div className="imageContainer">
+              <img className="bookImage" src={bookImg} alt="" />
+            </div>
+            <div className="infoContainer">
+              <Typography className={classes.bookName}>
+                {data.bookName}
+              </Typography>
+              <Typography className={classes.bookAuthor}>
+                {data.author}
+              </Typography>
+              <Typography className={classes.bookQuantity}>
+                {data.quantity}
+              </Typography>
+              <Typography className={classes.bookPrize}>
+                Rs. {data.price}
+              </Typography>
+            </div>
+            {data.isCart ? (
+              "ss"
+            ) : (
+              <div className="buttonContainer">
                 <Button
                   variant="contained"
                   onClick={(e) => addedToBag(e, data)}
@@ -158,16 +197,15 @@ export default function DisplayNotes() {
                 <Button variant="outlined" className={classes.wishListButton}>
                   WishList
                 </Button>
-              </div>}
-             
-              <div className="descClass">
-                <Typography className={classes.bookName}>
-                  Book Detail
-                </Typography>
-                {data.description}
               </div>
+            )}
+
+            <div className="descClass">
+              <Typography className={classes.bookName}>Book Detail</Typography>
+              {data.description}
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );
