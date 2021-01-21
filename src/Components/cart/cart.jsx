@@ -10,6 +10,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
 import "./cart.css";
 
 const services = new Services();
@@ -66,6 +67,82 @@ export default function Cart(props) {
   const [summaryField, setSummaryField] = React.useState(false);
   const [value, setValue] = React.useState("Home");
 
+  const [name, setName] = React.useState();
+  const [nameFlag, setNameFlag] = React.useState(false);
+  const [nameError, setNameError] = React.useState("");
+  const [mobile, setMobile] = React.useState();
+  const [mobileFlag, setMobileFlag] = React.useState(false);
+  const [mobileError, setMobileError] = React.useState("");
+  const [address, setAddress] = React.useState();
+  const [addressFlag, setAddressFlag] = React.useState(false);
+  const [addressError, setAddressError] = React.useState("");
+  const [city, setCity] = React.useState();
+  const [cityFlag, setCityFlag] = React.useState(false);
+  const [cityError, setCityError] = React.useState("");
+  const [state, setState] = React.useState();
+  const [stateFlag, setStateFlag] = React.useState(false);
+  const [stateError, setStateError] = React.useState("");
+
+  const makeInitial = () => {
+    setNameFlag(false);
+    setNameError("");
+    setAddressFlag(false);
+    setAddressError("");
+    setMobileFlag(false);
+    setMobileError("");
+    setCityFlag(false);
+    setCityError("");
+    setStateFlag(false);
+    setStateError("");
+  };
+
+  const patternCheck = () => {
+    makeInitial();
+    const namePattern = /^[A-Z]{1}[a-z ]{3,}$/;
+    const mobilePattern = /^[6-9]{1}[0-9]{9}$/;
+    const addressPattern =  /^[A-Za-z ]{5,}$/;
+    const cityPattern = /^[A-Za-z ]{3,}$/;
+    const statePattern = /^[A-Za-z ]{3,}$/;
+    
+    let isError = false;
+
+    if (!namePattern.test(name)) {
+      setNameFlag(true);
+      setNameError("Name is Not Proper");
+      isError = true;
+    }
+    if (!mobilePattern.test(mobile)) {
+      setMobileFlag(true);
+      setMobileError("Mobile Number is Not Proper");
+      isError = true;
+    }
+    if (!addressPattern.test(address) || (address == undefined)) {
+      setAddressFlag(true);
+      setAddressError("Address is Not Proper");
+      isError = true;
+    }
+    if (!cityPattern.test(city) || (city == undefined)) {
+      setCityFlag(true);
+      setCityError("Invalid City");
+      isError = true;
+    }
+    if (!statePattern.test(state) || (state == undefined)) {
+      setStateFlag(true);
+      setStateError("Invalid state");
+      isError = true;
+    }
+    console.log("name "+name+"   mobile "+mobile+"   address "+address+"   state "+state+"   city "+city);
+    return isError;
+  };
+
+  const Continue = () => {
+    if (patternCheck()) {
+      console.log("Error Occured");
+    } else {
+      console.log("Success");
+      setSummaryField(true);
+    }
+  };
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -102,41 +179,117 @@ export default function Cart(props) {
     );
   };
 
-  const CustomerDetailsForm = () => {
+  
+  const CheckoutItem = () => {
     return (
-      <>
-        <span className="inlineField">
+      <div className="cartItem">
+        {books.map((data) => (
+          <div className="cartBookItem">
+            <img className="cartBookImage" src={bookImg} alt="" />
+            <div className="infoContainer">
+              <Typography className={classes.bookName}>
+                {data.product_id.bookName}
+              </Typography>
+              <Typography className={classes.bookAuthor}>
+                {data.product_id.author}
+              </Typography>
+              <Typography className={classes.bookPrize}>
+                Rs. {data.product_id.price}
+              </Typography>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <div className="cartBody">
+      <div className="cartContainer">
+        My Cart ({books.length})
+        <CartBooks />
+        {detailForm ? "" :
+        <div className="blockButton">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.placeButton}
+            onClick={() => setDetailForm(true)}
+          >
+            PLACE ORDER
+          </Button>
+        </div>}
+      </div>
+      <div className="cartContainer">
+        Customer Details
+        {detailForm ? (
+          <>
+            <span className="inlineField">
           <div className="inputField">
             Full Name
-            <InputBase className={classes.inputField} placeholder="Full Name" />
+            <TextField
+                value={name}
+                variant="outlined"
+                onChange={(e) => setName(e.target.value)}
+                error={nameFlag}
+                helperText={nameError}
+                fullWidth
+                className={classes.input}
+              />
           </div>
           <div className="inputField">
             Mobile Number
-            <InputBase
-              className={classes.inputField}
-              placeholder="Mobile Number"
-            />
+            <TextField
+                value={mobile}
+                variant="outlined"
+                onChange={(e) => setMobile(e.target.value)}
+                error={mobileFlag}
+                helperText={mobileError}
+                fullWidth
+                className={classes.input}
+                type="number"
+              />
           </div>
         </span>
         <span className="inlineField">
           <div className="inputAdderssField">
             Address
-            <InputBase
-              className={classes.inputAdderss}
-              placeholder="Adderss"
-              multiline
-              fullWidth
-            />
+            <TextField
+                value={address}
+                variant="outlined"
+                onChange={(e) => setAddress(e.target.value)}
+                error={addressFlag}
+                helperText={addressError}
+                fullWidth
+                multiline
+                className={classes.inputAddress}
+              />
           </div>
         </span>
         <span className="inlineField">
           <div className="inputField">
             City/Town
-            <InputBase className={classes.inputField} placeholder="City/Town" />
+            <TextField
+                value={city}
+                variant="outlined"
+                onChange={(e) => setCity(e.target.value)}
+                error={cityFlag}
+                helperText={cityError}
+                fullWidth
+                className={classes.input}
+              />
           </div>
           <div className="inputField">
             State
-            <InputBase className={classes.inputField} placeholder="State" />
+            <TextField
+                value={state}
+                variant="outlined"
+                onChange={(e) => setState(e.target.value)}
+                error={stateFlag}
+                helperText={stateError}
+                fullWidth
+                className={classes.input}
+              />
           </div>
         </span>
         <span className="inlineField">
@@ -169,64 +322,17 @@ export default function Cart(props) {
             </FormControl>
           </div>
         </span>
-      </>
-    );
-  };
-
-  const CheckoutItem = () => {
-    return (
-      <div className="cartItem">
-        {books.map((data) => (
-          <div className="cartBookItem">
-            <img className="cartBookImage" src={bookImg} alt="" />
-            <div className="infoContainer">
-              <Typography className={classes.bookName}>
-                {data.product_id.bookName}
-              </Typography>
-              <Typography className={classes.bookAuthor}>
-                {data.product_id.author}
-              </Typography>
-              <Typography className={classes.bookPrize}>
-                Rs. {data.product_id.price}
-              </Typography>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  return (
-    <div className="cartBody">
-      <div className="cartContainer">
-        My Cart ({books.length})
-        <CartBooks />
-        <div className="blockButton">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.placeButton}
-            onClick={() => setDetailForm(true)}
-          >
-            PLACE ORDER
-          </Button>
-        </div>
-      </div>
-      <div className="cartContainer">
-        Customer Details
-        {detailForm ? (
-          <>
-            <CustomerDetailsForm />
+            {summaryField ? "" :
             <div className="blockButton">
               <Button
                 variant="contained"
                 color="primary"
                 className={classes.placeButton}
-                onClick={() => setSummaryField(true)}
+                onClick={Continue}
               >
                 CONTINUE
               </Button>
-            </div>{" "}
+            </div>}
           </>
         ) : (
           ""

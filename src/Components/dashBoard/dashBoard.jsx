@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "../AppBar/AppBar"
 import Books from "../displayBooks/displayBooks"
 import Services from "../../Services/productServices";
+import { Switch, Route} from "react-router-dom";
+import ProtectedRoutes from "../../protectedRoutes.js";
 import Cart from "../cart/cart"
 
 const services = new Services();
@@ -41,7 +43,14 @@ export default function Dashboard(props) {
     return (
         <div className={classes.dashboardMain}>
             <AppBar totalCartItem={cartBooks.length} setShow={setShow}/>
-        {show ? <Cart cartBooks={cartBooks} /> : <Books cartBooks={cartBooks}/>}
+            <Switch >
+            <Route path="/dashboard" exact>
+            <Books cartBooks={cartBooks} />
+            </Route>
+            <ProtectedRoutes path="/dashboard/cart" exact>
+            <Cart cartBooks={cartBooks} />
+            </ProtectedRoutes>
+            </Switch>
             
         </div>
     )

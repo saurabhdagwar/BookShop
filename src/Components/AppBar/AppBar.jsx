@@ -104,6 +104,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Appbar(props) {
   const classes = useStyles();
+
+  const nextPath = () => {
+    // props.history.push("../dashboard/cart");
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -129,7 +134,7 @@ export default function Appbar(props) {
           <div className={classes.rightOptions}>
             <SearchIcon className={classes.buttonSearch} />
 
-          <IconButton className={classes.cartButton} onClick={() => {props.setShow(true)}}>
+          <IconButton className={classes.cartButton} onClick={nextPath}>
           <StyledBadge badgeContent={props.totalCartItem} >
              <ShoppingCartOutlinedIcon />
             </StyledBadge>
