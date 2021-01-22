@@ -1,67 +1,74 @@
-import React from "react"
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "../AppBar/AppBar"
-import Books from "../displayBooks/displayBooks"
+import AppBar from "../AppBar/AppBar";
+import Books from "../displayBooks/displayBooks";
 import Services from "../../Services/productServices";
-import { Switch, Route} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import ProtectedRoutes from "../../protectedRoutes.js";
-import PlacedOrder from "../OrderPlaced/orderPlaced"
-import Cart from "../cart/cart"
+import PlacedOrder from "../OrderPlaced/orderPlaced";
+import Cart from "../cart/cart";
 
 const services = new Services();
 const useStyles = makeStyles((theme) => ({
-    dashboardMain:{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "white"
-    }
-}))    
+  dashboardMain: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+  },
+}));
 
 export default function Dashboard(props) {
-    const classes = useStyles();
-    const [show, setShow] = React.useState(false);
-    const [cartBooks, setCartBooks] = React.useState([]);
-    const [orderPlaced, setOrderPlaced] = React.useState([]);
+  const classes = useStyles();
+  const [show, setShow] = React.useState(false);
+  const [cartBooks, setCartBooks] = React.useState([]);
+  const [orderPlaced, setOrderPlaced] = React.useState([]);
 
-    React.useEffect(() => {
-        allCartItem();
-      }, []);
-    
-      const nextPath = (e,path) => {
-        e.stopPropagation();
-        props.history.push(path);
-      };
+  React.useEffect(() => {
+    allCartItem();
+  }, []);
 
-      const allCartItem = () => {
-        services
-          .getCartItem()
-          .then((data) => {
-            console.log(data.data.result);
-            setCartBooks(data.data.result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
+  const nextPath = (e, path) => {
+    e.stopPropagation();
+    props.history.push(path);
+  };
 
-    return (
-        <div className={classes.dashboardMain}>
-            <AppBar totalCartItem={cartBooks.length} nextPath={nextPath} setShow={setShow}/>
-            <Switch >
-            <Route path="/dashboard" exact>
-            <Books cartBooks={cartBooks} />
-            </Route>
-            <ProtectedRoutes path="/dashboard/cart" exact>
-            <Cart cartBooks={cartBooks} nextPath={nextPath} setOrderPlaced={setOrderPlaced}/>
-            </ProtectedRoutes>
-            <ProtectedRoutes path="/dashboard/orderPlaced" exact>
-            <PlacedOrder orderPlaced={orderPlaced} nextPath={nextPath} />
-            </ProtectedRoutes>
-            </Switch>
-            
-        </div>
-    )
+  const allCartItem = () => {
+    services
+      .getCartItem()
+      .then((data) => {
+        console.log(data.data.result);
+        setCartBooks(data.data.result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  return (
+    <div className={classes.dashboardMain}>
+      <AppBar
+        totalCartItem={cartBooks.length}
+        nextPath={nextPath}
+        setShow={setShow}
+      />
+      <Switch>
+        <Route path="/dashboard" exact>
+          <Books cartBooks={cartBooks} />
+        </Route>
+        <ProtectedRoutes path="/dashboard/cart" exact>
+          <Cart
+            cartBooks={cartBooks}
+            nextPath={nextPath}
+            setOrderPlaced={setOrderPlaced}
+          />
+        </ProtectedRoutes>
+        <ProtectedRoutes path="/dashboard/orderPlaced" exact>
+          <PlacedOrder orderPlaced={orderPlaced} nextPath={nextPath} />
+        </ProtectedRoutes>
+      </Switch>
+    </div>
+  );
 }

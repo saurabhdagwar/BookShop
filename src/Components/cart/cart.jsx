@@ -82,7 +82,6 @@ export default function Cart(props) {
   const [state, setState] = React.useState();
   const [stateFlag, setStateFlag] = React.useState(false);
   const [stateError, setStateError] = React.useState("");
-  
 
   const makeInitial = () => {
     setNameFlag(false);
@@ -101,10 +100,10 @@ export default function Cart(props) {
     makeInitial();
     const namePattern = /^[A-Z]{1}[a-z ]{3,}$/;
     const mobilePattern = /^[6-9]{1}[0-9]{9}$/;
-    const addressPattern =  /^[A-Za-z ]{5,}$/;
+    const addressPattern = /^[A-Za-z ]{5,}$/;
     const cityPattern = /^[A-Za-z ]{3,}$/;
     const statePattern = /^[A-Za-z ]{3,}$/;
-    
+
     let isError = false;
 
     if (!namePattern.test(name)) {
@@ -117,22 +116,33 @@ export default function Cart(props) {
       setMobileError("Mobile Number is Not Proper");
       isError = true;
     }
-    if (!addressPattern.test(address) || (address == undefined)) {
+    if (!addressPattern.test(address) || address == undefined) {
       setAddressFlag(true);
       setAddressError("Address is Not Proper");
       isError = true;
     }
-    if (!cityPattern.test(city) || (city == undefined)) {
+    if (!cityPattern.test(city) || city == undefined) {
       setCityFlag(true);
       setCityError("Invalid City");
       isError = true;
     }
-    if (!statePattern.test(state) || (state == undefined)) {
+    if (!statePattern.test(state) || state == undefined) {
       setStateFlag(true);
       setStateError("Invalid state");
       isError = true;
     }
-    console.log("name "+name+"   mobile "+mobile+"   address "+address+"   state "+state+"   city "+city);
+    console.log(
+      "name " +
+        name +
+        "   mobile " +
+        mobile +
+        "   address " +
+        address +
+        "   state " +
+        state +
+        "   city " +
+        city
+    );
     return isError;
   };
 
@@ -144,8 +154,6 @@ export default function Cart(props) {
       setSummaryField(true);
     }
   };
-
-  
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -182,7 +190,6 @@ export default function Cart(props) {
     );
   };
 
-  
   const CheckoutItem = () => {
     return (
       <div className="cartItem">
@@ -197,7 +204,7 @@ export default function Cart(props) {
                 {data.product_id.author}
               </Typography>
               <Typography className={classes.bookPrize}>
-                Rs. {(data.product_id.price)*(data.product_id.quantity)}
+                Rs. {data.product_id.price * data.product_id.quantity}
               </Typography>
             </div>
           </div>
@@ -210,158 +217,165 @@ export default function Cart(props) {
     let order = [];
     props.cartBooks.map((data) => {
       let same = {
-        "product_id": data.product_id._id,
-        "product_name": data.product_id.bookName,
-        "product_quantity": data.product_id.quantity,
-        "product_price": data.product_id.price
-       }
+        product_id: data.product_id._id,
+        product_name: data.product_id.bookName,
+        product_quantity: data.product_id.quantity,
+        product_price: data.product_id.price,
+      };
       order.push(same);
-    })
+    });
     let orderData = {
-      "orders": order
-    }
-    console.log(orderData)
-    services.addOrder(orderData)
-    .then((data) => {
-      console.log("Successfully order Placed"+JSON.stringify(data));
-      props.setOrderPlaced(data);
-      props.nextPath(e,'../dashboard/orderPlaced');
-    })
-    .catch((err) => {
-      console.log("Error occured while placing order"+err);
-    })
-  }
+      orders: order,
+    };
+    console.log(orderData);
+    services
+      .addOrder(orderData)
+      .then((data) => {
+        console.log("Successfully order Placed" + JSON.stringify(data));
+        props.setOrderPlaced(data);
+        props.nextPath(e, "../dashboard/orderPlaced");
+      })
+      .catch((err) => {
+        console.log("Error occured while placing order" + err);
+      });
+  };
 
   return (
-    <div className="cartBody" >
+    <div className="cartBody">
       <div className="cartContainer">
         My Cart ({props.cartBooks.length})
         <CartBooks />
-        {detailForm ? "" :
-        <div className="blockButton">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.placeButton}
-            onClick={() => setDetailForm(true)}
-          >
-            PLACE ORDER
-          </Button>
-        </div>}
+        {detailForm ? (
+          ""
+        ) : (
+          <div className="blockButton">
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.placeButton}
+              onClick={() => setDetailForm(true)}
+            >
+              PLACE ORDER
+            </Button>
+          </div>
+        )}
       </div>
       <div className="cartContainer">
         Customer Details
         {detailForm ? (
           <>
             <span className="inlineField">
-          <div className="inputField">
-            Full Name
-            <TextField
-                value={name}
-                variant="outlined"
-                onChange={(e) => setName(e.target.value)}
-                error={nameFlag}
-                helperText={nameError}
-                fullWidth
-                className={classes.input}
-              />
-          </div>
-          <div className="inputField">
-            Mobile Number
-            <TextField
-                value={mobile}
-                variant="outlined"
-                onChange={(e) => setMobile(e.target.value)}
-                error={mobileFlag}
-                helperText={mobileError}
-                fullWidth
-                className={classes.input}
-                type="number"
-              />
-          </div>
-        </span>
-        <span className="inlineField">
-          <div className="inputAdderssField">
-            Address
-            <TextField
-                value={address}
-                variant="outlined"
-                onChange={(e) => setAddress(e.target.value)}
-                error={addressFlag}
-                helperText={addressError}
-                fullWidth
-                multiline
-                className={classes.inputAddress}
-              />
-          </div>
-        </span>
-        <span className="inlineField">
-          <div className="inputField">
-            City/Town
-            <TextField
-                value={city}
-                variant="outlined"
-                onChange={(e) => setCity(e.target.value)}
-                error={cityFlag}
-                helperText={cityError}
-                fullWidth
-                className={classes.input}
-              />
-          </div>
-          <div className="inputField">
-            State
-            <TextField
-                value={state}
-                variant="outlined"
-                onChange={(e) => setState(e.target.value)}
-                error={stateFlag}
-                helperText={stateError}
-                fullWidth
-                className={classes.input}
-              />
-          </div>
-        </span>
-        <span className="inlineField">
-          <div className="inputField">
-            Type
-            <FormControl component="fieldset">
-              <RadioGroup
-                aria-label="gender"
-                name="gender1"
-                value={value}
-                onChange={handleChange}
-                className={classes.radioGroup}
-              >
-                <FormControlLabel
-                  value="Home"
-                  control={<Radio />}
-                  label="Home"
+              <div className="inputField">
+                Full Name
+                <TextField
+                  value={name}
+                  variant="outlined"
+                  onChange={(e) => setName(e.target.value)}
+                  error={nameFlag}
+                  helperText={nameError}
+                  fullWidth
+                  className={classes.input}
                 />
-                <FormControlLabel
-                  value="Work"
-                  control={<Radio />}
-                  label="Work"
+              </div>
+              <div className="inputField">
+                Mobile Number
+                <TextField
+                  value={mobile}
+                  variant="outlined"
+                  onChange={(e) => setMobile(e.target.value)}
+                  error={mobileFlag}
+                  helperText={mobileError}
+                  fullWidth
+                  className={classes.input}
+                  type="number"
                 />
-                <FormControlLabel
-                  value="Other"
-                  control={<Radio />}
-                  label="Other"
+              </div>
+            </span>
+            <span className="inlineField">
+              <div className="inputAdderssField">
+                Address
+                <TextField
+                  value={address}
+                  variant="outlined"
+                  onChange={(e) => setAddress(e.target.value)}
+                  error={addressFlag}
+                  helperText={addressError}
+                  fullWidth
+                  multiline
+                  className={classes.inputAddress}
                 />
-              </RadioGroup>
-            </FormControl>
-          </div>
-        </span>
-            {summaryField ? "" :
-            <div className="blockButton">
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.placeButton}
-                onClick={Continue}
-              >
-                CONTINUE
-              </Button>
-            </div>}
+              </div>
+            </span>
+            <span className="inlineField">
+              <div className="inputField">
+                City/Town
+                <TextField
+                  value={city}
+                  variant="outlined"
+                  onChange={(e) => setCity(e.target.value)}
+                  error={cityFlag}
+                  helperText={cityError}
+                  fullWidth
+                  className={classes.input}
+                />
+              </div>
+              <div className="inputField">
+                State
+                <TextField
+                  value={state}
+                  variant="outlined"
+                  onChange={(e) => setState(e.target.value)}
+                  error={stateFlag}
+                  helperText={stateError}
+                  fullWidth
+                  className={classes.input}
+                />
+              </div>
+            </span>
+            <span className="inlineField">
+              <div className="inputField">
+                Type
+                <FormControl component="fieldset">
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    value={value}
+                    onChange={handleChange}
+                    className={classes.radioGroup}
+                  >
+                    <FormControlLabel
+                      value="Home"
+                      control={<Radio />}
+                      label="Home"
+                    />
+                    <FormControlLabel
+                      value="Work"
+                      control={<Radio />}
+                      label="Work"
+                    />
+                    <FormControlLabel
+                      value="Other"
+                      control={<Radio />}
+                      label="Other"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </div>
+            </span>
+            {summaryField ? (
+              ""
+            ) : (
+              <div className="blockButton">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.placeButton}
+                  onClick={Continue}
+                >
+                  CONTINUE
+                </Button>
+              </div>
+            )}
           </>
         ) : (
           ""

@@ -1,67 +1,67 @@
-.cartBody{
-    top: 15%;
-    left: 10%;
-    display: flex;
-    flex-direction: column;
-    width: 1000px;
-    position: absolute;
+.cartBody {
+  top: 15%;
+  left: 10%;
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  position: absolute;
 }
-.cartItem{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.cartItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-.cartBookItem{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
+.cartBookItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
-.cartContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    border: 1px lightgray solid;
-    font-weight: bold;
-    font-size: 15px;
-    width: 70%;
-    padding: 15px;
-    margin: 15px;
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px lightgray solid;
+  font-weight: bold;
+  font-size: 15px;
+  width: 70%;
+  padding: 15px;
+  margin: 15px;
 }
-.cartBookImage{
-    width: 20%;
-    height: 70%;
+.cartBookImage {
+  width: 20%;
+  height: 70%;
 }
-.countItem{
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
+.countItem {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
 }
-.blockButton{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+.blockButton {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
-.inlineField{
-    display: flex;
-    flex-direction: row;
-    width: 70% ;
-    height: 5%;
+.inlineField {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  height: 5%;
 }
-.inputField{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 12px;
-    margin: 5px;
+.inputField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 12px;
+  margin: 5px;
 }
-.inputAdderssField{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 12px;
-    margin: 5px;
-    width: 97%;
+.inputAdderssField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 12px;
+  margin: 5px;
+  width: 97%;
 }

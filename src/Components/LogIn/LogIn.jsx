@@ -103,9 +103,11 @@ export default function Login(props) {
       services
         .SignIn(data)
         .then((data) => {
-          console.log("Login successful" + JSON.stringify(data.data.result.accessToken));
+          console.log(
+            "Login successful" + JSON.stringify(data.data.result.accessToken)
+          );
           localStorage.setItem("bookStoreToken", data.data.result.accessToken);
-          nextPath("../dashboard")
+          nextPath("../dashboard");
         })
         .catch((err) => {
           console.log("Login Error" + err);
@@ -119,41 +121,41 @@ export default function Login(props) {
         <div className={classes.loginMain}>
           <div className={classes.Title}>Book Store</div>
           <div className={classes.SignUpBody}>
-          <div className={classes.header}>
-            Login
-            <Button onClick={() => nextPath("../SignUp")}> Sign Up </Button>
-          </div>
-          <div className={classes.inputField}>
-            <TextField
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              error={emailFlag}
-              helperText={emailError}
+            <div className={classes.header}>
+              Login
+              <Button onClick={() => nextPath("../SignUp")}> Sign Up </Button>
+            </div>
+            <div className={classes.inputField}>
+              <TextField
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={emailFlag}
+                helperText={emailError}
+                fullWidth
+                className={classes.input}
+                label="Email"
+              />
+            </div>
+            <div className={classes.inputField}>
+              <TextField
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={passwordFlag}
+                helperText={passwordError}
+                fullWidth
+                className={classes.input}
+                label="Password"
+                type="password"
+              />
+            </div>
+            <Button
               fullWidth
-              className={classes.input}
-              label="Email"
-            />
-          </div>
-          <div className={classes.inputField}>
-            <TextField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              error={passwordFlag}
-              helperText={passwordError}
-              fullWidth
-              className={classes.input}
-              label="Password"
-              type="password"
-            />
-          </div>
-          <Button
-            fullWidth
-            className={classes.regButton}
-            onClick={submit}
-            variant="contained"
-          >
-            Login
-          </Button>
+              className={classes.regButton}
+              onClick={submit}
+              variant="contained"
+            >
+              Login
+            </Button>
           </div>
         </div>
       </Dialog>

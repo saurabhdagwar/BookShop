@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Pagination from "../Pagination/Pagination"
+import Pagination from "../Pagination/Pagination";
 import "./displayBooks.css";
 const services = new Services();
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffff",
     borderRadius: "2px",
   },
-  addedBagButton:{
+  addedBagButton: {
     backgroundColor: "#1976D2",
     width: "170px",
     margin: "5px",
@@ -124,7 +124,7 @@ export default function DisplayNotes(props) {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-  }
+  };
 
   const indexOfLastBook = currentPage * postsPerPage;
   const indexOfFirstBook = indexOfLastBook - postsPerPage;
@@ -181,10 +181,7 @@ export default function DisplayNotes(props) {
               </Typography>
             </div>
             {data.isCart ? (
-              <Button
-                variant="contained"
-                className={classes.addedBagButton}
-              >
+              <Button variant="contained" className={classes.addedBagButton}>
                 Added To Bag
               </Button>
             ) : (
@@ -199,18 +196,20 @@ export default function DisplayNotes(props) {
                 <Button variant="outlined" className={classes.wishListButton}>
                   WishList
                 </Button>
-
               </div>
             )}
-            
+
             <div className="descClass">
               <Typography className={classes.bookName}>Book Detail</Typography>
               {data.description}
             </div>
-          </div> 
+          </div>
         ))}
-        <Pagination postsPerPage={postsPerPage} totalPosts={books.length} paginate={paginate}></Pagination>
-              
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={books.length}
+          paginate={paginate}
+        ></Pagination>
       </div>
     </div>
   );

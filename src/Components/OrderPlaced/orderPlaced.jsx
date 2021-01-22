@@ -3,16 +3,16 @@ import "./orderPlaced.css";
 import placed from "../../assets/Placed.JPG";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   text: {
     fontSize: "18px",
   },
-  shopingButton:{
-      marginTop: '1%',
-      backgroundColor: ''
-  }
+  shopingButton: {
+    marginTop: "1%",
+    backgroundColor: "",
+  },
 }));
 
 export default function OrderPlaced(props) {
@@ -39,13 +39,19 @@ export default function OrderPlaced(props) {
           <td>admin@bookstore.com</td>
           <td>+91 8163475881</td>
           <td>
-            42, 14 main 15th Cross, Sector 4, opp to 
-            BDA complex near Kamarakom restaurent HSR layout
-            Banglore 560034
+            42, 14 main 15th Cross, Sector 4, opp to BDA complex near Kamarakom
+            restaurent HSR layout Banglore 560034
           </td>
         </tr>
       </table>
-      <Button className={classes.shopingButton} onClick={(e) => {props.nextPath(e,'../dashboard')}} variant="contained" color="primary">
+      <Button
+        className={classes.shopingButton}
+        onClick={(e) => {
+          props.nextPath(e, "../dashboard");
+        }}
+        variant="contained"
+        color="primary"
+      >
         CONTINUE SHOPPING
       </Button>
     </div>
