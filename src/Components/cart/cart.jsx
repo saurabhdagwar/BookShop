@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Cart(props) {
   const classes = useStyles();
-  const [books, setBooks] = React.useState(props.cartBooks);
+  const [books, setBooks] = React.useState();
   const [detailForm, setDetailForm] = React.useState(false);
   const [summaryField, setSummaryField] = React.useState(false);
   const [value, setValue] = React.useState("Home");
@@ -82,6 +82,7 @@ export default function Cart(props) {
   const [state, setState] = React.useState();
   const [stateFlag, setStateFlag] = React.useState(false);
   const [stateError, setStateError] = React.useState("");
+  
 
   const makeInitial = () => {
     setNameFlag(false);
@@ -144,6 +145,8 @@ export default function Cart(props) {
     }
   };
 
+  
+
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -151,7 +154,7 @@ export default function Cart(props) {
   const CartBooks = () => {
     return (
       <div className="cartItem">
-        {books.map((data) => (
+        {props.cartBooks.map((data) => (
           <div className="cartBookItem">
             <img className="cartBookImage" src={bookImg} alt="" />
             <div className="infoContainer">
@@ -183,7 +186,7 @@ export default function Cart(props) {
   const CheckoutItem = () => {
     return (
       <div className="cartItem">
-        {books.map((data) => (
+        {props.cartBooks.map((data) => (
           <div className="cartBookItem">
             <img className="cartBookImage" src={bookImg} alt="" />
             <div className="infoContainer">
@@ -194,7 +197,7 @@ export default function Cart(props) {
                 {data.product_id.author}
               </Typography>
               <Typography className={classes.bookPrize}>
-                Rs. {data.product_id.price}
+                Rs. {(data.product_id.price)*(data.product_id.quantity)}
               </Typography>
             </div>
           </div>
@@ -203,10 +206,36 @@ export default function Cart(props) {
     );
   };
 
+  const checkout = (e) => {
+    let order = [];
+    props.cartBooks.map((data) => {
+      let same = {
+        "product_id": data.product_id._id,
+        "product_name": data.product_id.bookName,
+        "product_quantity": data.product_id.quantity,
+        "product_price": data.product_id.price
+       }
+      order.push(same);
+    })
+    let orderData = {
+      "orders": order
+    }
+    console.log(orderData)
+    services.addOrder(orderData)
+    .then((data) => {
+      console.log("Successfully order Placed"+JSON.stringify(data));
+      props.setOrderPlaced(data);
+      props.nextPath(e,'../dashboard/orderPlaced');
+    })
+    .catch((err) => {
+      console.log("Error occured while placing order"+err);
+    })
+  }
+
   return (
-    <div className="cartBody">
+    <div className="cartBody" >
       <div className="cartContainer">
-        My Cart ({books.length})
+        My Cart ({props.cartBooks.length})
         <CartBooks />
         {detailForm ? "" :
         <div className="blockButton">
@@ -348,6 +377,7 @@ export default function Cart(props) {
               <Button
                 variant="contained"
                 color="primary"
+                onClick={checkout}
                 className={classes.placeButton}
               >
                 CHECKOUT

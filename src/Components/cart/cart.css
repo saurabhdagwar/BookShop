@@ -1,9 +1,9 @@
 .cartBody{
     top: 15%;
+    left: 10%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    width: 80%;
+    width: 1000px;
     position: absolute;
 }
 .cartItem{

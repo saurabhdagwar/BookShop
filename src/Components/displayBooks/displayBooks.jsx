@@ -55,10 +55,11 @@ export default function DisplayNotes(props) {
   const [data, setData] = React.useState(0);
   const [sort, setSort] = React.useState({ type: "" });
 
+
   React.useEffect(() => {
     getAllBooks();
+    // getCartItems();
   }, []);
-
 
   const getAllBooks = () => {
     services
@@ -66,12 +67,12 @@ export default function DisplayNotes(props) {
       .then((data) => {
         setBooks(data.data.result);
         setData(data.data.result);
-        // console.log(data.data.result);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -85,22 +86,17 @@ export default function DisplayNotes(props) {
         setBooks(data);
         break;
       case '2':
-        setBooks(data.sort((a, b) => (a.price > b.price) ? 1 : -1));
+        setBooks(books.sort((a, b) => (a.price > b.price) ? 1 : -1));
         break;
       case '1':
-        setBooks(data.sort((a, b) => (a.price > b.price) ? -1 : 1));
+        setBooks(books.sort((a, b) => (a.price > b.price) ? -1 : 1));
         break;
       case '3':
-        setBooks(data.reverse());
+        setBooks(books.reverse());
         break;
     }
   };
 
-  const cartCheck = (e,data) => {
-    e.stopPropagation();
-    console.log("cartBooks"+props.cartBooks);
-   
-  }
 
   const addedToBag = (e, data) => {
     e.stopPropagation();
@@ -151,21 +147,7 @@ export default function DisplayNotes(props) {
       </span>
       <div className="allBooks">
         {books.map((data) => (
-          <div className="bookContainer" onLoad={
-            (e) => {
-              e.stopPropagation();
-              const check = props.cartBooks.some((cart) => cart.product_id._id === data._id)
-               if(check){
-                data.isCart = true;
-                console.log("Cart----------");
-              }
-              else{
-                data.isCart = false;
-              }
-              console.log(check);
-              // console.log(props.cartBooks);
-            }
-          }>
+          <div className="bookContainer" >
             <div className="imageContainer">
               <img className="bookImage" src={bookImg} alt="" />
             </div>

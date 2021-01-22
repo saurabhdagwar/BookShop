@@ -5,6 +5,7 @@ import Books from "../displayBooks/displayBooks"
 import Services from "../../Services/productServices";
 import { Switch, Route} from "react-router-dom";
 import ProtectedRoutes from "../../protectedRoutes.js";
+import PlacedOrder from "../OrderPlaced/orderPlaced"
 import Cart from "../cart/cart"
 
 const services = new Services();
@@ -23,11 +24,17 @@ export default function Dashboard(props) {
     const classes = useStyles();
     const [show, setShow] = React.useState(false);
     const [cartBooks, setCartBooks] = React.useState([]);
+    const [orderPlaced, setOrderPlaced] = React.useState([]);
 
     React.useEffect(() => {
         allCartItem();
       }, []);
     
+      const nextPath = (e,path) => {
+        e.stopPropagation();
+        props.history.push(path);
+      };
+
       const allCartItem = () => {
         services
           .getCartItem()
@@ -42,13 +49,16 @@ export default function Dashboard(props) {
 
     return (
         <div className={classes.dashboardMain}>
-            <AppBar totalCartItem={cartBooks.length} setShow={setShow}/>
+            <AppBar totalCartItem={cartBooks.length} nextPath={nextPath} setShow={setShow}/>
             <Switch >
             <Route path="/dashboard" exact>
             <Books cartBooks={cartBooks} />
             </Route>
             <ProtectedRoutes path="/dashboard/cart" exact>
-            <Cart cartBooks={cartBooks} />
+            <Cart cartBooks={cartBooks} nextPath={nextPath} setOrderPlaced={setOrderPlaced}/>
+            </ProtectedRoutes>
+            <ProtectedRoutes path="/dashboard/orderPlaced" exact>
+            <PlacedOrder orderPlaced={orderPlaced} nextPath={nextPath} />
             </ProtectedRoutes>
             </Switch>
             

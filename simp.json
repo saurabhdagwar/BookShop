@@ -1,0 +1,87 @@
+{
+  "data": {
+    "success": true,
+    "message": "Order successfully placed!!!",
+    "result": [
+      {
+        "_id": "600ad3ea5941a60015a51419",
+        "product_id": "600283a30c8cf200174511bc",
+        "product_name": "Avikdasvfvf",
+        "product_quantity": 2,
+        "product_price": 1000,
+        "user_id": "6005cf3da074480017e5b727",
+        "__v": 0,
+        "createdAt": "2021-01-22T13:32:26.945Z",
+        "updatedAt": "2021-01-22T13:32:26.945Z"
+      },
+      {
+        "_id": "600ad3ea5941a60015a5141a",
+        "product_id": "6001a19fc752740017a94445",
+        "product_name": "Avik",
+        "product_quantity": 1,
+        "product_price": 10,
+        "user_id": "6005cf3da074480017e5b727",
+        "__v": 0,
+        "createdAt": "2021-01-22T13:32:26.946Z",
+        "updatedAt": "2021-01-22T13:32:26.946Z"
+      },
+      {
+        "_id": "600ad3ea5941a60015a5141b",
+        "product_id": "6004179e9b45da00179e9fe7",
+        "product_name": "Let us c",
+        "product_quantity": 10,
+        "product_price": 1000,
+        "user_id": "6005cf3da074480017e5b727",
+        "__v": 0,
+        "createdAt": "2021-01-22T13:32:26.947Z",
+        "updatedAt": "2021-01-22T13:32:26.947Z"
+      },
+      {
+        "_id": "600ad3ea5941a60015a5141c",
+        "product_id": "60060c13a2e621001710de48",
+        "product_name": "Let us c",
+        "product_quantity": 10,
+        "product_price": 10,
+        "user_id": "6005cf3da074480017e5b727",
+        "__v": 0,
+        "createdAt": "2021-01-22T13:32:26.947Z",
+        "updatedAt": "2021-01-22T13:32:26.947Z"
+      },
+      {
+        "_id": "600ad3ea5941a60015a5141d",
+        "product_id": "60073598727e0e00175acce4",
+        "product_name": "React",
+        "product_quantity": 9,
+        "product_price": 300,
+        "user_id": "6005cf3da074480017e5b727",
+        "__v": 0,
+        "createdAt": "2021-01-22T13:32:26.948Z",
+        "updatedAt": "2021-01-22T13:32:26.948Z"
+      }
+    ]
+  },
+  "status": 200,
+  "statusText": "OK",
+  "headers": {
+    "content-length": "1391",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "config": {
+    "url": "https://backend-bookstore.herokuapp.com/bookstore_user/add/order",
+    "method": "post",
+    "data": "{\"orders\":[{\"product_id\":\"600283a30c8cf200174511bc\",\"product_name\":\"avikdasvfvf\",\"product_quantity\":2,\"product_price\":1000},{\"product_id\":\"6001a19fc752740017a94445\",\"product_name\":\"avik\",\"product_quantity\":1,\"product_price\":10},{\"product_id\":\"6004179e9b45da00179e9fe7\",\"product_name\":\"let us c\",\"product_quantity\":10,\"product_price\":1000},{\"product_id\":\"60060c13a2e621001710de48\",\"product_name\":\"let us c\",\"product_quantity\":10,\"product_price\":10},{\"product_id\":\"60073598727e0e00175acce4\",\"product_name\":\"react\",\"product_quantity\":9,\"product_price\":300}]}",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json;charset=utf-8",
+      "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDA1Y2YzZGEwNzQ0ODAwMTdlNWI3MjciLCJpYXQiOjE2MTEyNDcyNDYsImV4cCI6MTYxMTMzMzY0Nn0.XtcCMInwU_QnDsA8tlHOJUUPoIC5mv-_D28i6lU5IOo"
+    },
+    "transformRequest": [null],
+    "transformResponse": [null],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1
+  },
+  "request": {}
+}

@@ -1,0 +1,25 @@
+.placedBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+.successfulImage{
+    height: 25%;
+    width: 25%;
+    margin-top: 6%;
+}
+.orderTable{
+    width: 60%;
+    margin-top: 2%;
+}
+table, td {
+    border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+th {
+    background-color: lightgray;
+    padding: 1%;
+}

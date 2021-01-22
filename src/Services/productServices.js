@@ -25,4 +25,14 @@ export default class productServices {
       });
   };
 
+  addOrder = (data) => {
+    const user = localStorage.getItem("bookStoreToken")
+    console.log(data);
+    return axios.Post(`${baseUrl}/add/order`,data,{
+        headers: {
+          "x-access-token": `${user}`,
+        },
+      });
+  };
+
 }
