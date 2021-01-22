@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-
 import "./displayBooks.css";
 const services = new Services();
 
@@ -35,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffff",
     borderRadius: "2px",
   },
+  addedBagButton:{
+    backgroundColor: "#1976D2",
+    width: "170px",
+    margin: "5px",
+    color: "#ffff",
+    borderRadius: "2px",
+    fontSize: "11px",
+  },
   wishListButton: {
     padding: "3px 4px 3px 4px",
     margin: "5px",
@@ -55,10 +62,8 @@ export default function DisplayNotes(props) {
   const [data, setData] = React.useState(0);
   const [sort, setSort] = React.useState({ type: "" });
 
-
   React.useEffect(() => {
     getAllBooks();
-    // getCartItems();
   }, []);
 
   const getAllBooks = () => {
@@ -67,12 +72,12 @@ export default function DisplayNotes(props) {
       .then((data) => {
         setBooks(data.data.result);
         setData(data.data.result);
+        books.map((data) => (data.isCart = false));
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -82,21 +87,23 @@ export default function DisplayNotes(props) {
     });
     console.log(sort.type);
     switch (sort.type) {
-      case '0':
+      case "0":
         setBooks(data);
         break;
-      case '2':
-        setBooks(books.sort((a, b) => (a.price > b.price) ? 1 : -1));
+      case "2":
+        setBooks(data);
+        setBooks(books.sort((a, b) => (a.price > b.price ? 1 : -1)));
         break;
-      case '1':
-        setBooks(books.sort((a, b) => (a.price > b.price) ? -1 : 1));
+      case "1":
+        setBooks(data);
+        setBooks(books.sort((a, b) => (a.price > b.price ? -1 : 1)));
         break;
-      case '3':
+      case "3":
+        setBooks(data);
         setBooks(books.reverse());
         break;
     }
   };
-
 
   const addedToBag = (e, data) => {
     e.stopPropagation();
@@ -129,25 +136,22 @@ export default function DisplayNotes(props) {
                 name: "type",
               }}
             >
-              <option value={0} >
-                Sort by relevance
-              </option>
-              <option value={1} >
-                Price: low to high
-              </option>
-              <option value={2} >
-                Price: high to low
-              </option>
-              <option value={3} >
-                Newest Arrival
-              </option>
+              <option value={0}>Sort by relevance</option>
+              <option value={1}>Price: low to high</option>
+              <option value={2}>Price: high to low</option>
+              <option value={3}>Newest Arrival</option>
             </Select>
           </FormControl>
         </div>
       </span>
       <div className="allBooks">
         {books.map((data) => (
-          <div className="bookContainer" >
+          <div className="bookContainer">
+            {props.cartBooks.map((cart) => {
+              if (cart.product_id._id === data._id) {
+                data.isCart = true;
+              }
+            })}
             <div className="imageContainer">
               <img className="bookImage" src={bookImg} alt="" />
             </div>
@@ -166,7 +170,12 @@ export default function DisplayNotes(props) {
               </Typography>
             </div>
             {data.isCart ? (
-              "ss"
+              <Button
+                variant="contained"
+                className={classes.addedBagButton}
+              >
+                Added To Bag
+              </Button>
             ) : (
               <div className="buttonContainer">
                 <Button

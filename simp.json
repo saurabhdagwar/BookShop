@@ -1,87 +1,263 @@
-{
-  "data": {
-    "success": true,
-    "message": "Order successfully placed!!!",
-    "result": [
-      {
-        "_id": "600ad3ea5941a60015a51419",
-        "product_id": "600283a30c8cf200174511bc",
-        "product_name": "Avikdasvfvf",
-        "product_quantity": 2,
-        "product_price": 1000,
-        "user_id": "6005cf3da074480017e5b727",
-        "__v": 0,
-        "createdAt": "2021-01-22T13:32:26.945Z",
-        "updatedAt": "2021-01-22T13:32:26.945Z"
-      },
-      {
-        "_id": "600ad3ea5941a60015a5141a",
-        "product_id": "6001a19fc752740017a94445",
-        "product_name": "Avik",
-        "product_quantity": 1,
-        "product_price": 10,
-        "user_id": "6005cf3da074480017e5b727",
-        "__v": 0,
-        "createdAt": "2021-01-22T13:32:26.946Z",
-        "updatedAt": "2021-01-22T13:32:26.946Z"
-      },
-      {
-        "_id": "600ad3ea5941a60015a5141b",
-        "product_id": "6004179e9b45da00179e9fe7",
-        "product_name": "Let us c",
-        "product_quantity": 10,
-        "product_price": 1000,
-        "user_id": "6005cf3da074480017e5b727",
-        "__v": 0,
-        "createdAt": "2021-01-22T13:32:26.947Z",
-        "updatedAt": "2021-01-22T13:32:26.947Z"
-      },
-      {
-        "_id": "600ad3ea5941a60015a5141c",
-        "product_id": "60060c13a2e621001710de48",
-        "product_name": "Let us c",
-        "product_quantity": 10,
-        "product_price": 10,
-        "user_id": "6005cf3da074480017e5b727",
-        "__v": 0,
-        "createdAt": "2021-01-22T13:32:26.947Z",
-        "updatedAt": "2021-01-22T13:32:26.947Z"
-      },
-      {
-        "_id": "600ad3ea5941a60015a5141d",
-        "product_id": "60073598727e0e00175acce4",
-        "product_name": "React",
-        "product_quantity": 9,
-        "product_price": 300,
-        "user_id": "6005cf3da074480017e5b727",
-        "__v": 0,
-        "createdAt": "2021-01-22T13:32:26.948Z",
-        "updatedAt": "2021-01-22T13:32:26.948Z"
-      }
-    ]
-  },
-  "status": 200,
-  "statusText": "OK",
-  "headers": {
-    "content-length": "1391",
-    "content-type": "application/json; charset=utf-8"
-  },
-  "config": {
-    "url": "https://backend-bookstore.herokuapp.com/bookstore_user/add/order",
-    "method": "post",
-    "data": "{\"orders\":[{\"product_id\":\"600283a30c8cf200174511bc\",\"product_name\":\"avikdasvfvf\",\"product_quantity\":2,\"product_price\":1000},{\"product_id\":\"6001a19fc752740017a94445\",\"product_name\":\"avik\",\"product_quantity\":1,\"product_price\":10},{\"product_id\":\"6004179e9b45da00179e9fe7\",\"product_name\":\"let us c\",\"product_quantity\":10,\"product_price\":1000},{\"product_id\":\"60060c13a2e621001710de48\",\"product_name\":\"let us c\",\"product_quantity\":10,\"product_price\":10},{\"product_id\":\"60073598727e0e00175acce4\",\"product_name\":\"react\",\"product_quantity\":9,\"product_price\":300}]}",
-    "headers": {
-      "Accept": "application/json, text/plain, */*",
-      "Content-Type": "application/json;charset=utf-8",
-      "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDA1Y2YzZGEwNzQ0ODAwMTdlNWI3MjciLCJpYXQiOjE2MTEyNDcyNDYsImV4cCI6MTYxMTMzMzY0Nn0.XtcCMInwU_QnDsA8tlHOJUUPoIC5mv-_D28i6lU5IOo"
+[
+    {
+      "description": "The famous book with amazing content",
+      "discountPrice": 10,
+      "bookImage": null,
+      "_id": "5fec69d13f489200170be73b",
+      "admin_user_id": "5febedfa0f902a00176b6b7e",
+      "bookName": "Xyzabc",
+      "author": "Xyz nmoabc",
+      "quantity": 10,
+      "price": 1000,
+      "createdAt": "2020-12-30T11:51:45.809Z",
+      "updatedAt": "2020-12-30T11:51:45.809Z",
+      "__v": 0
     },
-    "transformRequest": [null],
-    "transformResponse": [null],
-    "timeout": 0,
-    "xsrfCookieName": "XSRF-TOKEN",
-    "xsrfHeaderName": "X-XSRF-TOKEN",
-    "maxContentLength": -1,
-    "maxBodyLength": -1
+    {
+      "description": "testing api",
+      "discountPrice": 2,
+      "bookImage": null,
+      "_id": "6001a19fc752740017a94445",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "avik",
+      "author": "test",
+      "quantity": 1,
+      "price": 10,
+      "createdAt": "2021-01-15T14:07:27.264Z",
+      "updatedAt": "2021-01-15T14:07:27.264Z",
+      "__v": 0
+    },
+    {
+      "description": "testing",
+      "discountPrice": 200,
+      "bookImage": null,
+      "_id": "600283a30c8cf200174511bc",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "avikdasvfvf",
+      "author": "avik",
+      "quantity": 2,
+      "price": 1000,
+      "createdAt": "2021-01-16T06:11:48.070Z",
+      "updatedAt": "2021-01-19T05:20:41.968Z",
+      "__v": 0
+    },
+    {
+      "description": "The famous book with amazing content",
+      "discountPrice": 0,
+      "bookImage": null,
+      "_id": "6004179e9b45da00179e9fe7",
+      "admin_user_id": "600195dcc752740017a94442",
+      "bookName": "let us c",
+      "author": "yankis",
+      "quantity": 10,
+      "price": 1000,
+      "createdAt": "2021-01-17T10:55:26.523Z",
+      "updatedAt": "2021-01-17T10:55:26.523Z",
+      "__v": 0
+    },
+    {
+      "description": "c prog",
+      "discountPrice": 2,
+      "bookImage": null,
+      "_id": "60060c13a2e621001710de48",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "let us c",
+      "author": "c bala",
+      "quantity": 10,
+      "price": 10,
+      "createdAt": "2021-01-18T22:30:43.377Z",
+      "updatedAt": "2021-01-18T22:30:43.377Z",
+      "__v": 0
+    },
+    {
+      "description": "add new book",
+      "discountPrice": 20,
+      "bookImage": null,
+      "_id": "6007357e727e0e00175acce3",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "javascript",
+      "author": "test",
+      "quantity": 4,
+      "price": 400,
+      "createdAt": "2021-01-19T19:39:42.656Z",
+      "updatedAt": "2021-01-19T19:39:42.656Z",
+      "__v": 0
+    },
+    {
+      "description": "add book",
+      "discountPrice": 32,
+      "bookImage": null,
+      "_id": "60073598727e0e00175acce4",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "react",
+      "author": "test",
+      "quantity": 9,
+      "price": 300,
+      "createdAt": "2021-01-19T19:40:08.239Z",
+      "updatedAt": "2021-01-19T19:40:08.239Z",
+      "__v": 0
+    }
+  ]
+// -------------------------------------------------------------
+[
+  {
+    "product_id": {
+      "description": "testing",
+      "discountPrice": 200,
+      "bookImage": null,
+      "_id": "600283a30c8cf200174511bc",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "avikdasvfvf",
+      "author": "avik",
+      "quantity": 2,
+      "price": 1000,
+      "createdAt": "2021-01-16T06:11:48.070Z",
+      "updatedAt": "2021-01-19T05:20:41.968Z",
+      "__v": 0
+    },
+    "quantityToBuy": 1,
+    "_id": "60067e2ec11c510017db0016",
+    "user_id": {
+      "address": [],
+      "isVerified": true,
+      "_id": "6005cf3da074480017e5b727",
+      "fullName": "Saurabh dagwar",
+      "email": "saurabhdagwar2020@gmail.com",
+      "phone": "+918265432987",
+      "createdAt": "2021-01-18T18:11:10.353Z",
+      "updatedAt": "2021-01-18T18:13:26.915Z",
+      "__v": 0
+    },
+    "createdAt": "2021-01-19T06:37:34.979Z",
+    "updatedAt": "2021-01-19T06:37:34.979Z",
+    "__v": 0
   },
-  "request": {}
-}
+  {
+    "product_id": {
+      "description": "testing api",
+      "discountPrice": 2,
+      "bookImage": null,
+      "_id": "6001a19fc752740017a94445",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "avik",
+      "author": "test",
+      "quantity": 1,
+      "price": 10,
+      "createdAt": "2021-01-15T14:07:27.264Z",
+      "updatedAt": "2021-01-15T14:07:27.264Z",
+      "__v": 0
+    },
+    "quantityToBuy": 1,
+    "_id": "60067e94c11c510017db0017",
+    "user_id": {
+      "address": [],
+      "isVerified": true,
+      "_id": "6005cf3da074480017e5b727",
+      "fullName": "Saurabh dagwar",
+      "email": "saurabhdagwar2020@gmail.com",
+      "phone": "+918265432987",
+      "createdAt": "2021-01-18T18:11:10.353Z",
+      "updatedAt": "2021-01-18T18:13:26.915Z",
+      "__v": 0
+    },
+    "createdAt": "2021-01-19T06:39:17.102Z",
+    "updatedAt": "2021-01-19T06:39:17.102Z",
+    "__v": 0
+  },
+  {
+    "product_id": {
+      "description": "The famous book with amazing content",
+      "discountPrice": 0,
+      "bookImage": null,
+      "_id": "6004179e9b45da00179e9fe7",
+      "admin_user_id": "600195dcc752740017a94442",
+      "bookName": "let us c",
+      "author": "yankis",
+      "quantity": 10,
+      "price": 1000,
+      "createdAt": "2021-01-17T10:55:26.523Z",
+      "updatedAt": "2021-01-17T10:55:26.523Z",
+      "__v": 0
+    },
+    "quantityToBuy": 1,
+    "_id": "6006f911727e0e00175acce1",
+    "user_id": {
+      "address": [],
+      "isVerified": true,
+      "_id": "6005cf3da074480017e5b727",
+      "fullName": "Saurabh dagwar",
+      "email": "saurabhdagwar2020@gmail.com",
+      "phone": "+918265432987",
+      "createdAt": "2021-01-18T18:11:10.353Z",
+      "updatedAt": "2021-01-18T18:13:26.915Z",
+      "__v": 0
+    },
+    "createdAt": "2021-01-19T15:21:53.263Z",
+    "updatedAt": "2021-01-19T15:21:53.263Z",
+    "__v": 0
+  },
+  {
+    "product_id": {
+      "description": "c prog",
+      "discountPrice": 2,
+      "bookImage": null,
+      "_id": "60060c13a2e621001710de48",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "let us c",
+      "author": "c bala",
+      "quantity": 10,
+      "price": 10,
+      "createdAt": "2021-01-18T22:30:43.377Z",
+      "updatedAt": "2021-01-18T22:30:43.377Z",
+      "__v": 0
+    },
+    "quantityToBuy": 1,
+    "_id": "600803c4a841fd0017a7e5a2",
+    "user_id": {
+      "address": [],
+      "isVerified": true,
+      "_id": "6005cf3da074480017e5b727",
+      "fullName": "Saurabh dagwar",
+      "email": "saurabhdagwar2020@gmail.com",
+      "phone": "+918265432987",
+      "createdAt": "2021-01-18T18:11:10.353Z",
+      "updatedAt": "2021-01-18T18:13:26.915Z",
+      "__v": 0
+    },
+    "createdAt": "2021-01-20T10:19:48.971Z",
+    "updatedAt": "2021-01-20T10:19:48.971Z",
+    "__v": 0
+  },
+  {
+    "product_id": {
+      "description": "add book",
+      "discountPrice": 32,
+      "bookImage": null,
+      "_id": "60073598727e0e00175acce4",
+      "admin_user_id": "600137686fb3e00017831b78",
+      "bookName": "react",
+      "author": "test",
+      "quantity": 9,
+      "price": 300,
+      "createdAt": "2021-01-19T19:40:08.239Z",
+      "updatedAt": "2021-01-19T19:40:08.239Z",
+      "__v": 0
+    },
+    "quantityToBuy": 1,
+    "_id": "600803e3a841fd0017a7e5a3",
+    "user_id": {
+      "address": [],
+      "isVerified": true,
+      "_id": "6005cf3da074480017e5b727",
+      "fullName": "Saurabh dagwar",
+      "email": "saurabhdagwar2020@gmail.com",
+      "phone": "+918265432987",
+      "createdAt": "2021-01-18T18:11:10.353Z",
+      "updatedAt": "2021-01-18T18:13:26.915Z",
+      "__v": 0
+    },
+    "createdAt": "2021-01-20T10:20:20.114Z",
+    "updatedAt": "2021-01-20T10:20:20.114Z",
+    "__v": 0
+  }
+]
