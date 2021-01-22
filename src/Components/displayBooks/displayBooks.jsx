@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
+import Pagination from "../Pagination/Pagination"
 import "./displayBooks.css";
 const services = new Services();
 
@@ -61,6 +61,8 @@ export default function DisplayNotes(props) {
   const [books, setBooks] = React.useState([]);
   const [data, setData] = React.useState(0);
   const [sort, setSort] = React.useState({ type: "" });
+  const [postsPerPage] = React.useState(12);
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
     getAllBooks();
@@ -113,11 +115,20 @@ export default function DisplayNotes(props) {
       .addToCart(id)
       .then((data) => {
         console.log(data);
+        getAllBooks();
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
+  const indexOfLastBook = currentPage * postsPerPage;
+  const indexOfFirstBook = indexOfLastBook - postsPerPage;
+  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
   return (
     <div className="displayBook">
@@ -145,7 +156,7 @@ export default function DisplayNotes(props) {
         </div>
       </span>
       <div className="allBooks">
-        {books.map((data) => (
+        {currentBooks.map((data) => (
           <div className="bookContainer">
             {props.cartBooks.map((cart) => {
               if (cart.product_id._id === data._id) {
@@ -188,15 +199,18 @@ export default function DisplayNotes(props) {
                 <Button variant="outlined" className={classes.wishListButton}>
                   WishList
                 </Button>
+
               </div>
             )}
-
+            
             <div className="descClass">
               <Typography className={classes.bookName}>Book Detail</Typography>
               {data.description}
             </div>
-          </div>
+          </div> 
         ))}
+        <Pagination postsPerPage={postsPerPage} totalPosts={books.length} paginate={paginate}></Pagination>
+              
       </div>
     </div>
   );
