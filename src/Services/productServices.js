@@ -35,4 +35,13 @@ export default class productServices {
       });
   };
 
+  deleteCartItem = (id) => {
+    const user = localStorage.getItem("bookStoreToken")
+    return axios.Delete(`${baseUrl}/remove_cart_item/${id}`,{
+        headers: {
+          "x-access-token": `${user}`,
+        },
+      });
+  }
+
 }

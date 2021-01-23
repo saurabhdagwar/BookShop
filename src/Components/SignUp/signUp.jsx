@@ -7,13 +7,16 @@ import Services from "../../Services/userServices";
 const services = new Services();
 
 const useStyles = makeStyles((theme) => ({
+ 
   signUpMain: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     borderRadius: "10px",
     width: "350px",
-    
+        [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
   },
   Title: {
     width: "100%",
@@ -139,7 +142,7 @@ export default function SignUp(props) {
 
   return (
     <>
-      <Dialog open={true}>
+      <Dialog open={true} className={classes.mainDialog}>
         <div className={classes.signUpMain}>
           <div className={classes.Title}>Book Store</div>
           <div className={classes.SignUpBody}>

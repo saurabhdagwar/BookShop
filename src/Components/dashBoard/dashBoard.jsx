@@ -61,6 +61,7 @@ export default function Dashboard(props) {
         <ProtectedRoutes path="/dashboard/cart" exact>
           <Cart
             cartBooks={cartBooks}
+            allCartItem={allCartItem}
             nextPath={nextPath}
             setOrderPlaced={setOrderPlaced}
           />

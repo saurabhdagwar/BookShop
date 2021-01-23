@@ -182,7 +182,17 @@ export default function Cart(props) {
                   value={data.product_id.quantity}
                 />
                 <IconButton className={classes.countButton}>+</IconButton>
-                <Button>Remove</Button>
+                <Button onClick={(e) => {
+                  e.stopPropagation();
+                  services.deleteCartItem(data._id)
+                  .then((data)=> {
+                    console.log("Successfully deleted"+data);
+                    props.allCartItem();
+                  })
+                  .catch((err) => {
+                    console.log("Error while removing"+err)
+                  })
+                } }>Remove</Button>
               </div>
             </div>
           </div>

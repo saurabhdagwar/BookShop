@@ -61,7 +61,6 @@ select {
 .bookContainer:hover .descClass {
   display: flex;
 }
-
 .descClass {
   display: none;
   position: relative;
@@ -81,4 +80,13 @@ select {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+@media only screen and (max-width: 500px) {
+  .displayBook {
+    width: 90%;
+  }
+  .allBooks {
+    justify-content: center;
+  }
 }
