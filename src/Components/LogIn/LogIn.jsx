@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Services from "../../Services/userServices";
 const services = new Services();
+let dialogControl = true;
 
 const useStyles = makeStyles((theme) => ({
   loginMain: {
@@ -13,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     borderRadius: "10px",
     width: "350px",
+    [theme.breakpoints.down("xs")]: {
+      width: '100%'
+    },
   },
   Title: {
     width: "100%",
@@ -25,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   SignUpBody: {
     padding: "30px",
+   
   },
   header: {
     display: "flex",
@@ -115,50 +120,56 @@ export default function Login(props) {
     }
   };
 
+  const LoginBody = () => {
+    return (
+      <div className={classes.loginMain}>
+        <div className={classes.Title}>Book Store</div>
+        <div className={classes.SignUpBody}>
+          <div className={classes.header}>
+            Login
+            <Button onClick={() => nextPath("../SignUp")}> Sign Up </Button>
+          </div>
+          <div className={classes.inputField}>
+            <TextField
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={emailFlag}
+              helperText={emailError}
+              fullWidth
+              className={classes.input}
+              label="Email"
+            />
+          </div>
+          <div className={classes.inputField}>
+            <TextField
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={passwordFlag}
+              helperText={passwordError}
+              fullWidth
+              className={classes.input}
+              label="Password"
+              type="password"
+            />
+          </div>
+          <Button
+            fullWidth
+            className={classes.regButton}
+            onClick={submit}
+            variant="contained"
+          >
+            Login
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
-      <Dialog open={true}>
-        <div className={classes.loginMain}>
-          <div className={classes.Title}>Book Store</div>
-          <div className={classes.SignUpBody}>
-            <div className={classes.header}>
-              Login
-              <Button onClick={() => nextPath("../SignUp")}> Sign Up </Button>
-            </div>
-            <div className={classes.inputField}>
-              <TextField
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                error={emailFlag}
-                helperText={emailError}
-                fullWidth
-                className={classes.input}
-                label="Email"
-              />
-            </div>
-            <div className={classes.inputField}>
-              <TextField
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                error={passwordFlag}
-                helperText={passwordError}
-                fullWidth
-                className={classes.input}
-                label="Password"
-                type="password"
-              />
-            </div>
-            <Button
-              fullWidth
-              className={classes.regButton}
-              onClick={submit}
-              variant="contained"
-            >
-              Login
-            </Button>
-          </div>
-        </div>
-      </Dialog>
+     {dialogControl ? <Dialog open={true}>
+        <LoginBody />
+      </Dialog> : ''}
     </>
   );
 }

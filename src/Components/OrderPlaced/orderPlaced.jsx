@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   text: {
-    fontSize: "18px",
+    fontSize: "17px",
   },
   shopingButton: {
     marginTop: "1%",

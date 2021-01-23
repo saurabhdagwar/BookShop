@@ -19,9 +19,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     backgroundColor: "white",
   },
- footer:{
-     width: '100%'
- }
+
 }));
 
 export default function Dashboard(props) {
@@ -75,7 +73,7 @@ export default function Dashboard(props) {
           <PlacedOrder orderPlaced={orderPlaced} nextPath={nextPath} />
         </ProtectedRoutes>
       </Switch>
-      <Footer className={classes.footer}/>
+      <Footer />
     </div>
   );
 }
