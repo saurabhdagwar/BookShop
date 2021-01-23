@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OrderPlaced(props) {
   const classes = useStyles();
+  const random = Math.floor((Math.random() * 1000000 ) + 1);
   return (
     <div className="placedBody">
       <img className="successfulImage" src={placed} alt="" />
@@ -25,7 +26,7 @@ export default function OrderPlaced(props) {
       </Typography>
       <Typography className={classes.text}>
         {" "}
-        the order id is #123456 save the order id for
+        the order id is #{random} save the order id for
       </Typography>
       <Typography className={classes.text}>future communication </Typography>
 

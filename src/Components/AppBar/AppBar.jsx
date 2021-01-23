@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
   titleName: {
     marginRight: "20px",
+    cursor: 'pointer',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -113,7 +114,9 @@ export default function Appbar(props) {
           <div className={classes.leftOptions}>
             <div className={classes.title}>
               <img className={classes.titleLogo} src={logo} />
-              <Typography className={classes.titleName} variant="h6">
+              <Typography className={classes.titleName} variant="h6" 
+              onClick={(e) => props.nextPath(e, "../dashboard")}
+              >
                 Bookstore
               </Typography>
             </div>
