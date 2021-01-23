@@ -6,6 +6,7 @@ import Services from "../../Services/productServices";
 import { Switch, Route } from "react-router-dom";
 import ProtectedRoutes from "../../protectedRoutes.js";
 import PlacedOrder from "../OrderPlaced/orderPlaced";
+import Footer from '../Footer/footer'
 import Cart from "../cart/cart";
 
 const services = new Services();
@@ -15,9 +16,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     backgroundColor: "white",
   },
+ footer:{
+     width: '100%'
+ }
 }));
 
 export default function Dashboard(props) {
@@ -54,6 +58,7 @@ export default function Dashboard(props) {
         nextPath={nextPath}
         setShow={setShow}
       />
+      
       <Switch>
         <Route path="/dashboard" exact>
           <Books cartBooks={cartBooks} allCartItem={allCartItem}/>
@@ -70,6 +75,7 @@ export default function Dashboard(props) {
           <PlacedOrder orderPlaced={orderPlaced} nextPath={nextPath} />
         </ProtectedRoutes>
       </Switch>
+      <Footer className={classes.footer}/>
     </div>
   );
 }

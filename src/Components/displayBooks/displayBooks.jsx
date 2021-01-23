@@ -61,7 +61,7 @@ export default function DisplayNotes(props) {
   const [books, setBooks] = React.useState([]);
   const [data, setData] = React.useState(0);
   const [sort, setSort] = React.useState({ type: "" });
-  const [postsPerPage] = React.useState(12);
+  const [postsPerPage] = React.useState(8);
   const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
@@ -180,6 +180,7 @@ export default function DisplayNotes(props) {
                 Rs. {data.price}
               </Typography>
             </div>
+
             {data.isCart ? (
               <Button variant="contained" className={classes.addedBagButton}>
                 Added To Bag

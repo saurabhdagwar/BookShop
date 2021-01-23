@@ -15,7 +15,6 @@ import Badge from "@material-ui/core/Badge";
 const StyledBadge = withStyles((theme) => ({
   badge: {
     right: -3,
-    top: 13,
     border: `2px solid ${theme.palette.background.paper}`,
     padding: "0 4px",
   },
@@ -97,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
+ 
   cartButton: {
     fontSize: "14px",
     color: "white",
@@ -137,7 +137,7 @@ export default function Appbar(props) {
               className={classes.cartButton}
               onClick={(e) => props.nextPath(e, "../dashboard/cart")}
             >
-              <StyledBadge badgeContent={props.totalCartItem}>
+              <StyledBadge badgeContent={props.totalCartItem} className={classes.badge}>
                 <ShoppingCartOutlinedIcon />
               </StyledBadge>
             </IconButton>

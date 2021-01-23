@@ -96,6 +96,18 @@ export default function Cart(props) {
     setStateError("");
   };
 
+  const removeItem = (e,data) => {
+    e.stopPropagation();
+    services.deleteCartItem(data._id)
+    .then((data)=> {
+      console.log("Successfully deleted"+data);
+      props.allCartItem();
+    })
+    .catch((err) => {
+      console.log("Error while removing"+err)
+    })
+  }
+
   const patternCheck = () => {
     makeInitial();
     const namePattern = /^[A-Z]{1}[a-z ]{3,}$/;
@@ -182,17 +194,7 @@ export default function Cart(props) {
                   value={data.product_id.quantity}
                 />
                 <IconButton className={classes.countButton}>+</IconButton>
-                <Button onClick={(e) => {
-                  e.stopPropagation();
-                  services.deleteCartItem(data._id)
-                  .then((data)=> {
-                    console.log("Successfully deleted"+data);
-                    props.allCartItem();
-                  })
-                  .catch((err) => {
-                    console.log("Error while removing"+err)
-                  })
-                } }>Remove</Button>
+                <Button onClick={(e) => {removeItem(e,data)} }>Remove</Button>
               </div>
             </div>
           </div>
@@ -249,6 +251,7 @@ export default function Cart(props) {
       .catch((err) => {
         console.log("Error occured while placing order" + err);
       });
+      props.cartBooks.map((book) => removeItem(e,book));
   };
 
   return (
