@@ -67,6 +67,12 @@
   width: 97%;
 }
 
+@media only screen and (max-width: 900px) {
+    .cartContainer {
+    width: 90%;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .cartBody {
         width: 100%;
