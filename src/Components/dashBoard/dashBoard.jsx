@@ -56,7 +56,7 @@ export default function Dashboard(props) {
       />
       <Switch>
         <Route path="/dashboard" exact>
-          <Books cartBooks={cartBooks} />
+          <Books cartBooks={cartBooks} allCartItem={allCartItem}/>
         </Route>
         <ProtectedRoutes path="/dashboard/cart" exact>
           <Cart

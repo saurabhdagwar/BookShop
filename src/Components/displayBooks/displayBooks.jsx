@@ -115,7 +115,7 @@ export default function DisplayNotes(props) {
       .addToCart(id)
       .then((data) => {
         console.log(data);
-        getAllBooks();
+        props.allCartItem();
       })
       .catch((err) => {
         console.log(err);

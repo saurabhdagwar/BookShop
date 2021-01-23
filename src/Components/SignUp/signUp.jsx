@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     borderRadius: "10px",
     width: "350px",
+    
   },
   Title: {
     width: "100%",

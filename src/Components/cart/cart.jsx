@@ -182,6 +182,7 @@ export default function Cart(props) {
                   value={data.product_id.quantity}
                 />
                 <IconButton className={classes.countButton}>+</IconButton>
+                <Button>Remove</Button>
               </div>
             </div>
           </div>
