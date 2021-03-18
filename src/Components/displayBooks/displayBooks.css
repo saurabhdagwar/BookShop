@@ -67,14 +67,14 @@ select {
   text-align: start;
   flex-direction: column;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 7px;
   border: 1px lightgray solid;
   z-index: 40;
   box-shadow: 1px 2px lightgray;
   padding: 10px;
-  bottom: 90%;
+  bottom: 99%;
   left: 90%;
-  min-height: 50%;
+  min-height: 30%;
 }
 .paginationBlock {
   width: 100%;

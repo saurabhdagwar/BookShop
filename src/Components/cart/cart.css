@@ -74,7 +74,7 @@
 
 @media only screen and (max-width: 600px) {
   .cartBody {
-    width: 100%;
+    width: 95%;
     top: 10%;
     margin: 2%;
     left: auto;
@@ -88,5 +88,9 @@
     padding: 5px;
     margin: 5px;
     margin-right: 10px;
+  }
+  .inlineField{
+    flex-direction: column;
+    width: 100%;
   }
 }
